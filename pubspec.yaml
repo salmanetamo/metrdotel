@@ -49,6 +49,8 @@ flutter:
     - images/sipping_coffee.png
     - images/eating_with_chopsticks.png
     - images/couple.png
+    - images/google_logo.png
+    - images/facebook_logo.png
 
   fonts:
     - family: Poppins
