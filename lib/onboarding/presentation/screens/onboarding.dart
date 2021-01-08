@@ -1,9 +1,6 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:metrdotel/core/routes/functions.dart';
-import 'package:metrdotel/core/routes/router.gr.dart';
 import 'package:metrdotel/onboarding/data/onboard_data.dart';
 import 'package:metrdotel/onboarding/presentation/bloc/onboarding_bloc.dart';
 
