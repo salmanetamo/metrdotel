@@ -56,17 +56,35 @@ FlatButton buttonLink(BuildContext context, String text, {Function onPressed}) {
 }
 
 FlatButton facebookButton(Function onPressed) {
-  return oAuthButton('Facebook', 'facebook_logo.png', Color(0xFF3b579d),
-      Color(0xFF3b579d), Colors.white, onPressed);
+  return oAuthButton(
+    'Facebook',
+    'facebook_logo.png',
+    Color(0xFF3b579d),
+    Color(0xFF3b579d),
+    Colors.white,
+    onPressed,
+  );
 }
 
 FlatButton googleButton(Function onPressed) {
-  return oAuthButton('Google', 'google_logo.png', Colors.white,
-      Color(0xFF7E7E7E), Colors.black, onPressed);
+  return oAuthButton(
+    'Google',
+    'google_logo.png',
+    Colors.white,
+    Color(0xFF7E7E7E),
+    Colors.black,
+    onPressed,
+  );
 }
 
-FlatButton oAuthButton(String name, String logoImageName, Color fillColor,
-    Color borderColor, Color textColor, Function onPressed) {
+FlatButton oAuthButton(
+  String name,
+  String logoImageName,
+  Color fillColor,
+  Color borderColor,
+  Color textColor,
+  Function onPressed,
+) {
   return FlatButton(
     height: 48.0,
     minWidth: 144.0,
@@ -95,5 +113,24 @@ FlatButton oAuthButton(String name, String logoImageName, Color fillColor,
     textColor: textColor,
     color: fillColor,
     onPressed: onPressed,
+  );
+}
+
+void showErrorSnackBar(BuildContext context, String message) {
+  Scaffold.of(context).showSnackBar(
+    SnackBar(
+      content: Text(message),
+    ),
+  );
+}
+
+Widget showLoadingSpinner(BuildContext context) {
+  return Center(
+    child: Container(
+      margin: EdgeInsets.only(top: 350.0),
+      child: CircularProgressIndicator(
+        backgroundColor: Theme.of(context).primaryColor,
+      ),
+    ),
   );
 }

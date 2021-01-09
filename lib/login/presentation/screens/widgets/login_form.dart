@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:metrdotel/core/routes/functions.dart';
+import 'package:metrdotel/login/presentation/cubit/login_cubit.dart';
+import 'package:metrdotel/shared/error/validators.dart';
+import 'package:metrdotel/shared/state/state_utils.dart';
 import 'package:metrdotel/shared/widgets/form_inputs.dart';
 import 'package:metrdotel/shared/widgets/ui_components.dart';
 
@@ -10,9 +15,35 @@ class LoginForm extends StatefulWidget {
 class _LoginFormState extends State<LoginForm> {
   final _formKey = GlobalKey<FormState>();
 
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+  final _passwordFocusNode = FocusNode();
+
+  bool _showPassword = false;
+
   @override
   Widget build(BuildContext context) {
-    bool showPassword = true;
+    return BlocConsumer<LoginCubit, LoginState>(
+      listener: (context, state) {
+        if (state.status == StateStatus.FAILURE)
+          showErrorSnackBar(context, state.message);
+        else if (state.status == StateStatus.SUCCESS)
+          navigateToHomeScreen(context);
+      },
+      builder: (context, state) {
+        switch (state.status) {
+          case StateStatus.IN_PROGRESS:
+            return showLoadingSpinner(context);
+          case StateStatus.SUCCESS:
+            return Container();
+          default:
+            return this._form(state.email, state.password);
+        }
+      },
+    );
+  }
+
+  Form _form(String email, String password) {
     return Form(
       key: _formKey,
       child: Column(
@@ -58,10 +89,20 @@ class _LoginFormState extends State<LoginForm> {
             key: GlobalKey<FormFieldState>(),
             hintText: 'Email',
             labelText: 'Email',
+            initialValue: email ?? null,
             validator: (value) {
-              if (value.isEmpty) return 'Enter good email';
+              String validateBlankEmail = validateEmptyValue(value, 'email');
+              if (validateBlankEmail != null) {
+                return validateBlankEmail;
+              }
+
+              String emailValidation = validateEmail(value);
+              if (emailValidation != null) {
+                return emailValidation;
+              }
               return null;
             },
+            controller: this._emailController,
           ),
           SizedBox(
             height: 16.0,
@@ -71,16 +112,40 @@ class _LoginFormState extends State<LoginForm> {
             key: GlobalKey<FormFieldState>(),
             hintText: 'Password',
             labelText: 'Password',
+            initialValue: password ?? null,
+            validator: (value) {
+              String validateBlankPassword =
+                  validateEmptyValue(value, 'password');
+              if (validateBlankPassword != null) {
+                return validateBlankPassword;
+              }
+
+              return null;
+            },
             suffixIcon: IconButton(
               icon: Icon(
                 Icons.remove_red_eye,
-                color: !showPassword
+                color: this._showPassword
                     ? Theme.of(context).primaryColor
                     : Colors.grey,
               ),
-              onPressed: () {},
+              onPressed: () {
+                setState(() {
+                  this._passwordFocusNode.unfocus();
+                  this._passwordFocusNode.canRequestFocus = false;
+                  this._showPassword = !this._showPassword;
+                  Future.delayed(
+                    Duration(milliseconds: 100),
+                    () {
+                      this._passwordFocusNode.canRequestFocus = true;
+                    },
+                  );
+                });
+              },
             ),
-            obscureText: showPassword,
+            obscureText: !this._showPassword,
+            controller: this._passwordController,
+            focusNode: this._passwordFocusNode,
           ),
           Container(
             alignment: Alignment.bottomRight,
@@ -97,7 +162,7 @@ class _LoginFormState extends State<LoginForm> {
           button(
             context,
             'Login',
-            onPressed: () {},
+            onPressed: _onSubmit,
           ),
           SizedBox(
             height: 16.0,
@@ -146,5 +211,15 @@ class _LoginFormState extends State<LoginForm> {
         ],
       ),
     );
+  }
+
+  void _onSubmit() {
+    if (this._formKey.currentState.validate()) {
+      // TODO: Send login event here
+      // this._formKey.currentState.save();
+      final loginCubit = context.read<LoginCubit>();
+
+      loginCubit.loginWithCredentials();
+    }
   }
 }

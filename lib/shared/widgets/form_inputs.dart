@@ -12,49 +12,56 @@ TextFormField textInput(
   bool readOnly = false,
   String initialValue,
   int maxLines = 1,
+  Function onSaved,
+  int errorMaxLines,
+  String errorText,
+  FocusNode focusNode,
 }) {
   return TextFormField(
-    key: key,
-    controller: controller,
-    style: !readOnly
-        ? Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 16)
-        : Theme.of(context).textTheme.overline.copyWith(fontSize: 14),
-    decoration: InputDecoration(
-      labelText: labelText,
-      labelStyle: Theme.of(context).textTheme.overline,
-      hintText: hintText,
-      hintStyle: Theme.of(context).textTheme.overline,
-      border: OutlineInputBorder(
-        borderRadius: const BorderRadius.all(
-          const Radius.circular(16.0),
+      key: key,
+      controller: controller,
+      style: !readOnly
+          ? Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 16)
+          : Theme.of(context).textTheme.overline.copyWith(fontSize: 14),
+      decoration: InputDecoration(
+        labelText: labelText,
+        labelStyle: Theme.of(context).textTheme.overline,
+        hintText: hintText,
+        hintStyle: Theme.of(context).textTheme.overline,
+        border: OutlineInputBorder(
+          borderRadius: const BorderRadius.all(
+            const Radius.circular(16.0),
+          ),
+          borderSide:
+              BorderSide(color: Color(0xFFffffff), style: BorderStyle.solid),
         ),
-        borderSide:
-            BorderSide(color: Color(0xFFffffff), style: BorderStyle.solid),
-      ),
-      errorBorder: OutlineInputBorder(
-        borderRadius: const BorderRadius.all(
-          const Radius.circular(16.0),
+        errorBorder: OutlineInputBorder(
+          borderRadius: const BorderRadius.all(
+            const Radius.circular(16.0),
+          ),
+          borderSide: BorderSide(color: Colors.red, style: BorderStyle.solid),
         ),
-        borderSide: BorderSide(color: Colors.red, style: BorderStyle.solid),
-      ),
-      disabledBorder: OutlineInputBorder(
-        borderRadius: const BorderRadius.all(
-          const Radius.circular(16.0),
+        disabledBorder: OutlineInputBorder(
+          borderRadius: const BorderRadius.all(
+            const Radius.circular(16.0),
+          ),
+          borderSide:
+              BorderSide(color: Color(0xFFEDEDED), style: BorderStyle.solid),
         ),
-        borderSide:
-            BorderSide(color: Color(0xFFEDEDED), style: BorderStyle.solid),
+        enabled: !readOnly,
+        filled: true,
+        fillColor: readOnly ? Color(0xFFEDEDED) : Color(0xFFF9F9F9),
+        suffixIcon: suffixIcon ?? null,
+        errorMaxLines: errorMaxLines ?? 1,
+        errorText: errorText,
       ),
-      enabled: !readOnly,
-      filled: true,
-      fillColor: readOnly ? Color(0xFFEDEDED) : Color(0xFFF9F9F9),
-      suffixIcon: suffixIcon ?? null,
-    ),
-    obscureText: obscureText,
-    validator: validator,
-    readOnly: readOnly,
-    initialValue: initialValue ?? null,
-    maxLines: maxLines,
-  );
+      obscureText: obscureText,
+      validator: validator,
+      readOnly: readOnly,
+      initialValue: initialValue ?? null,
+      maxLines: maxLines,
+      onSaved: onSaved,
+      focusNode: focusNode);
 }
 
 Switch switchInput(BuildContext context, bool value, Function onChanged) =>
