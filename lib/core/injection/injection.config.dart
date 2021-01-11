@@ -9,6 +9,7 @@ import 'package:injectable/injectable.dart';
 
 import '../../login/presentation/cubit/login_cubit.dart';
 import '../../onboarding/presentation/bloc/onboarding_bloc.dart';
+import '../../signup/presentation/cubit/signup_cubit.dart';
 
 /// adds generated dependencies
 /// to the provided [GetIt] instance
@@ -21,5 +22,6 @@ GetIt $initGetIt(
   final gh = GetItHelper(get, environment, environmentFilter);
   gh.factory<LoginCubit>(() => LoginCubit());
   gh.factory<OnboardingBloc>(() => OnboardingBloc());
+  gh.factory<SignupCubit>(() => SignupCubit());
   return get;
 }

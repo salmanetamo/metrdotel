@@ -1,29 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:metrdotel/core/routes/functions.dart';
-import 'package:metrdotel/login/presentation/cubit/login_cubit.dart';
+import 'package:metrdotel/signup/presentation/cubit/signup_cubit.dart';
 import 'package:metrdotel/shared/error/validators.dart';
 import 'package:metrdotel/shared/state/state_utils.dart';
 import 'package:metrdotel/shared/widgets/form_inputs.dart';
 import 'package:metrdotel/shared/widgets/ui_components.dart';
 
-class LoginForm extends StatefulWidget {
+class SignupForm extends StatefulWidget {
   @override
-  _LoginFormState createState() => _LoginFormState();
+  _SignupFormState createState() => _SignupFormState();
 }
 
-class _LoginFormState extends State<LoginForm> {
+class _SignupFormState extends State<SignupForm> {
   final _formKey = GlobalKey<FormState>();
 
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
+  TextEditingController _confirmPasswordController = TextEditingController();
   final _passwordFocusNode = FocusNode();
+  final _confirmPasswordFocusNode = FocusNode();
 
   bool _showPassword = false;
+  bool _showConfirmPassword = false;
+  bool _acceptedTermsAndConditions;
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<LoginCubit, LoginState>(
+    return BlocConsumer<SignupCubit, SignupState>(
       listener: (context, state) {
         if (state.status == StateStatus.FAILURE)
           showErrorSnackBar(context, state.message);
@@ -31,19 +35,21 @@ class _LoginFormState extends State<LoginForm> {
           navigateToHomeScreen(context);
       },
       builder: (context, state) {
+        this._acceptedTermsAndConditions = state.acceptedTermsAndConditions;
         switch (state.status) {
           case StateStatus.IN_PROGRESS:
             return showLoadingSpinner(context);
           case StateStatus.SUCCESS:
             return Container();
           default:
-            return this._form(state.email, state.password);
+            return this
+                ._form(state.email, state.password, state.confirmPassword);
         }
       },
     );
   }
 
-  Form _form(String email, String password) {
+  Form _form(String email, String password, String confirmPassword) {
     return Form(
       key: _formKey,
       child: Column(
@@ -54,29 +60,15 @@ class _LoginFormState extends State<LoginForm> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                  height: 32.0,
-                ),
-                Container(
-                  width: 72.0,
-                  height: 72.0,
-                  child: Image.asset(
-                    'images/eating_with_chopsticks.png', // TODO: Replace with correct image
-                    fit: BoxFit.fitHeight,
-                  ),
-                ),
-                SizedBox(
-                  height: 16.0,
+                  height: 48.0,
                 ),
                 Text(
-                  'Welcome to',
+                  'Create a new',
                   style: Theme.of(context).textTheme.headline1,
                 ),
                 Text(
-                  'Metrdotel',
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline1
-                      .copyWith(color: Theme.of(context).primaryColor),
+                  'account',
+                  style: Theme.of(context).textTheme.headline1,
                 ),
               ],
             ),
@@ -147,21 +139,55 @@ class _LoginFormState extends State<LoginForm> {
             controller: this._passwordController,
             focusNode: this._passwordFocusNode,
           ),
-          Container(
-            alignment: Alignment.bottomRight,
-            width: double.infinity,
-            child: buttonLink(
-              context,
-              'Forgot password?',
-              onPressed: () {},
+          SizedBox(
+            height: 16.0,
+          ),
+          textInput(
+            context,
+            key: GlobalKey<FormFieldState>(),
+            hintText: 'Confirm password',
+            labelText: 'Confirm password',
+            initialValue: confirmPassword ?? null,
+            validator: (value) {
+              String validateBlankPassword =
+                  validateEmptyValue(value, 'password confirmation');
+              if (validateBlankPassword != null) {
+                return validateBlankPassword;
+              }
+
+              return null;
+            },
+            suffixIcon: IconButton(
+              icon: Icon(
+                Icons.remove_red_eye,
+                color: this._showPassword
+                    ? Theme.of(context).primaryColor
+                    : Colors.grey,
+              ),
+              onPressed: () {
+                setState(() {
+                  this._passwordFocusNode.unfocus();
+                  this._passwordFocusNode.canRequestFocus = false;
+                  this._showPassword = !this._showPassword;
+                  Future.delayed(
+                    Duration(milliseconds: 100),
+                    () {
+                      this._passwordFocusNode.canRequestFocus = true;
+                    },
+                  );
+                });
+              },
             ),
+            obscureText: !this._showConfirmPassword,
+            controller: this._confirmPasswordController,
+            focusNode: this._confirmPasswordFocusNode,
           ),
           SizedBox(
             height: 16.0,
           ),
           button(
             context,
-            'Login',
+            'Register now',
             onPressed: _onSubmit,
           ),
           SizedBox(
@@ -170,12 +196,25 @@ class _LoginFormState extends State<LoginForm> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('Not a member?'),
+              Text('Already have an account?'),
               buttonLink(
                 context,
-                'Join now',
+                'Sign in',
                 onPressed: () {
-                  navigateToSignupScreen(context);
+                  navigateToLoginScreen(context);
+                },
+              ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('By registering I agree to the '),
+              buttonLink(
+                context,
+                'Terms of Use',
+                onPressed: () {
+                  navigateToTermsOfUseScreen(context);
                 },
               ),
             ],
@@ -191,7 +230,7 @@ class _LoginFormState extends State<LoginForm> {
                   endIndent: 8.0,
                 ),
               ),
-              Text('Or sign in with'),
+              Text('Or sign up with'),
               Expanded(
                 child: Divider(
                   thickness: 2.0,
@@ -217,11 +256,13 @@ class _LoginFormState extends State<LoginForm> {
 
   void _onSubmit() {
     if (this._formKey.currentState.validate()) {
-      final loginCubit = context.read<LoginCubit>();
+      final signupCubit = context.read<SignupCubit>();
 
-      loginCubit.loginWithCredentials(
+      signupCubit.signupWithCredentials(
         email: this._emailController.text,
         password: this._passwordController.text,
+        confirmPassword: this._confirmPasswordController.text,
+        acceptedTermsAndConditions: this._acceptedTermsAndConditions,
       );
     }
   }

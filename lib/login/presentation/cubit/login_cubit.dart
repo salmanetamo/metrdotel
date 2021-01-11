@@ -16,13 +16,11 @@ class LoginCubit extends Cubit<LoginState> {
           status: null,
         ));
 
-  Future<void> loginWithCredentials() async {
+  Future<void> loginWithCredentials({@required String email, @required String password}) async {
     emit(
       this.state.copyWith(message: 'Loading', status: StateStatus.IN_PROGRESS),
     );
     await Future.delayed(Duration(seconds: 5));
-    emit(
-      this.state.copyWith(status: StateStatus.SUCCESS)
-    );
+    emit(this.state.copyWith(status: StateStatus.SUCCESS));
   }
 }
