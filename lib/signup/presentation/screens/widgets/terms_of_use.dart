@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:metrdotel/core/routes/functions.dart';
+import 'package:metrdotel/shared/state/state_utils.dart';
 import 'package:metrdotel/shared/widgets/ui_components.dart';
 import 'package:metrdotel/signup/presentation/cubit/signup_cubit.dart';
 
@@ -12,11 +13,9 @@ class TermsOfUse extends StatefulWidget {
 class _TermsOfUseState extends State<TermsOfUse> {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => SignupCubit(),
-      child: BlocConsumer<SignupCubit, SignupState>(
+    return BlocConsumer<SignupCubit, SignupState>(
       listener: (context, state) {
-        if (state.acceptedTermsAndConditions != null) {
+        if (state.acceptedTermsAndConditions != null && state.status != StateStatus.FAILURE) {
           navigateToSignupScreen(context);
         }
       },
@@ -141,7 +140,6 @@ class _TermsOfUseState extends State<TermsOfUse> {
           )),
         );
       },
-    ),
     );
   }
 }

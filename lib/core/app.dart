@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:metrdotel/onboarding/presentation/bloc/onboarding_bloc.dart';
 import 'package:metrdotel/core/routes/router.gr.dart' as router;
 import 'package:metrdotel/core/theme/styles.dart';
+import 'package:metrdotel/signup/presentation/cubit/signup_cubit.dart';
 
 import 'injection/injection.dart';
 
@@ -15,6 +16,7 @@ class App extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => getIt<OnboardingBloc>()),
+        BlocProvider(create: (_) => getIt<SignupCubit>()),
       ],
       child: MaterialApp(
         title: 'Metrdotel',

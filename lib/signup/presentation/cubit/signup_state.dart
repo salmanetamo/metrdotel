@@ -19,12 +19,18 @@ class SignupState extends Equatable {
   });
 
   SignupState copyWith(
-      {String email, String password, String confirmPassword, bool acceptedTermsAndConditions, String message, StateStatus status}) {
+      {String email,
+      String password,
+      String confirmPassword,
+      bool acceptedTermsAndConditions,
+      String message,
+      StateStatus status}) {
     return SignupState(
       email: email ?? this.email,
       password: password ?? this.password,
       confirmPassword: confirmPassword ?? this.confirmPassword,
-      acceptedTermsAndConditions: acceptedTermsAndConditions ?? this.acceptedTermsAndConditions,
+      acceptedTermsAndConditions:
+          acceptedTermsAndConditions ?? this.acceptedTermsAndConditions,
       message: message ?? this.message,
       status: status ?? this.status,
     );
@@ -39,4 +45,9 @@ class SignupState extends Equatable {
         this.message,
         this.status,
       ];
+
+  @override
+  String toString() {
+    return '{\n\temail: ${this.email},\n\tpassword: ${this.password},\n\tconfirmPassword: ${this.confirmPassword},\n\tacceptedTermsAndConditions: ${this.acceptedTermsAndConditions},\n\tmessage: ${this.message},\n\tstatus: ${this.status}\n}';
+  }
 }

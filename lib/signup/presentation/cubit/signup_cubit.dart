@@ -24,16 +24,21 @@ class SignupCubit extends Cubit<SignupState> {
     @required String confirmPassword,
     @required bool acceptedTermsAndConditions,
   }) async {
-    emit(
-      this.state.copyWith(message: 'Loading', status: StateStatus.IN_PROGRESS),
-    );
-    if (acceptedTermsAndConditions == null) {
+    if (acceptedTermsAndConditions == null || !acceptedTermsAndConditions) {
       emit(
         this.state.copyWith(
+            email: email,
+            password: password,
+            confirmPassword: confirmPassword,
             message: 'Please accept the Terms and Conditions',
             status: StateStatus.FAILURE),
       );
     } else {
+      emit(
+        this
+            .state
+            .copyWith(message: 'Loading', status: StateStatus.IN_PROGRESS),
+      );
       await Future.delayed(Duration(seconds: 5));
       emit(this.state.copyWith(status: StateStatus.SUCCESS));
     }

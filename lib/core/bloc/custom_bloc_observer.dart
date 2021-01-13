@@ -20,4 +20,12 @@ class CustomBlocObserver extends BlocObserver {
     _logger.i(transition.event);
     super.onTransition(bloc, transition);
   }
+
+  
+  @override
+  void onChange(Cubit cubit, Change change) {
+    _logger.i('current state: ${change.currentState}');
+    _logger.i('next state: ${change.nextState.toString()}');
+    super.onChange(cubit, change);
+  }
 }

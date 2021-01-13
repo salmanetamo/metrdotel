@@ -14,6 +14,7 @@ class SignupForm extends StatefulWidget {
 
 class _SignupFormState extends State<SignupForm> {
   final _formKey = GlobalKey<FormState>();
+  var _passwordKey = GlobalKey<FormFieldState>();
 
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
@@ -42,14 +43,16 @@ class _SignupFormState extends State<SignupForm> {
           case StateStatus.SUCCESS:
             return Container();
           default:
-            return this
-                ._form(state.email, state.password, state.confirmPassword);
+            this._emailController.text = state.email;
+            this._passwordController.text = state.password;
+            this._confirmPasswordController.text = state.confirmPassword;
+            return this._form();
         }
       },
     );
   }
 
-  Form _form(String email, String password, String confirmPassword) {
+  Form _form() {
     return Form(
       key: _formKey,
       child: Column(
@@ -81,7 +84,6 @@ class _SignupFormState extends State<SignupForm> {
             key: GlobalKey<FormFieldState>(),
             hintText: 'Email',
             labelText: 'Email',
-            initialValue: email ?? null,
             validator: (value) {
               String validateBlankEmail = validateEmptyValue(value, 'email');
               if (validateBlankEmail != null) {
@@ -101,16 +103,21 @@ class _SignupFormState extends State<SignupForm> {
           ),
           textInput(
             context,
-            key: GlobalKey<FormFieldState>(),
+            key: this._passwordKey,
             hintText: 'Password',
             labelText: 'Password',
-            initialValue: password ?? null,
             validator: (value) {
               String validateBlankPassword =
                   validateEmptyValue(value, 'password');
               if (validateBlankPassword != null) {
                 return validateBlankPassword;
               }
+
+              String validateMinSizePassword =
+                  validateMinSize(value, 'password', 8);
+              if (validateMinSizePassword != null) {
+                return validateMinSizePassword;
+              }              
 
               return null;
             },
@@ -147,12 +154,16 @@ class _SignupFormState extends State<SignupForm> {
             key: GlobalKey<FormFieldState>(),
             hintText: 'Confirm password',
             labelText: 'Confirm password',
-            initialValue: confirmPassword ?? null,
             validator: (value) {
               String validateBlankPassword =
                   validateEmptyValue(value, 'password confirmation');
               if (validateBlankPassword != null) {
                 return validateBlankPassword;
+              }
+
+              String password = this._passwordKey.currentState.value;
+              if (password != this._confirmPasswordController.text) {
+                return 'Confirmation password does not match password';
               }
 
               return null;
@@ -214,7 +225,10 @@ class _SignupFormState extends State<SignupForm> {
                 context,
                 'Terms of Use',
                 onPressed: () {
-                  navigateToTermsOfUseScreen(context);
+                  this._onSubmit();
+                  if (this._formKey.currentState.validate()) {
+                    navigateToTermsOfUseScreen(context);
+                  }
                 },
               ),
             ],
