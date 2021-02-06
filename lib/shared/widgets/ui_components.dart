@@ -116,10 +116,11 @@ FlatButton oAuthButton(
   );
 }
 
-void showErrorSnackBar(BuildContext context, String message) {
+void showErrorSnackBar(BuildContext context, String message, Duration duration) {
   Scaffold.of(context).showSnackBar(
     SnackBar(
       content: Text(message),
+      duration: duration,
     ),
   );
 }

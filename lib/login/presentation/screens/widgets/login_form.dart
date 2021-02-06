@@ -26,7 +26,7 @@ class _LoginFormState extends State<LoginForm> {
     return BlocConsumer<LoginCubit, LoginState>(
       listener: (context, state) {
         if (state.status == StateStatus.FAILURE)
-          showErrorSnackBar(context, state.message);
+          showErrorSnackBar(context, state.message, Duration(seconds: 5));
         else if (state.status == StateStatus.SUCCESS)
           navigateToHomeScreen(context);
       },
@@ -37,13 +37,18 @@ class _LoginFormState extends State<LoginForm> {
           case StateStatus.SUCCESS:
             return Container();
           default:
-            return this._form(state.email, state.password);
+            this._emailController.text = state.email;
+            this._passwordController.text = state.password;
+            return this._form(state);
         }
       },
     );
   }
 
-  Form _form(String email, String password) {
+  Form _form(LoginState state) {
+    final isFailure =
+        state.status == StateStatus.FAILURE && state.failure != null;
+
     return Form(
       key: _formKey,
       child: Column(
@@ -60,7 +65,8 @@ class _LoginFormState extends State<LoginForm> {
                   width: 72.0,
                   height: 72.0,
                   child: Image.asset(
-                    'images/eating_with_chopsticks.png', // TODO: Replace with correct image
+                    'images/eating_with_chopsticks.png',
+                    // TODO: Replace with correct image
                     fit: BoxFit.fitHeight,
                   ),
                 ),
@@ -89,7 +95,7 @@ class _LoginFormState extends State<LoginForm> {
             key: GlobalKey<FormFieldState>(),
             hintText: 'Email',
             labelText: 'Email',
-            initialValue: email ?? null,
+            initialValue: state.email ?? null,
             validator: (value) {
               String validateBlankEmail = validateEmptyValue(value, 'email');
               if (validateBlankEmail != null) {
@@ -103,6 +109,18 @@ class _LoginFormState extends State<LoginForm> {
               return null;
             },
             controller: this._emailController,
+            errorText: isFailure
+                ? state.failure.containsErrorForField('email')
+                    ? state.failure
+                        .getErrorsForField('email')
+                        .map((e) => e.message)
+                        .toList()
+                        .join("\n")
+                    : null
+                : null,
+            errorMaxLines: isFailure
+                ? state.failure.getErrorsForField('email').length
+                : null,
           ),
           SizedBox(
             height: 16.0,
@@ -112,7 +130,7 @@ class _LoginFormState extends State<LoginForm> {
             key: GlobalKey<FormFieldState>(),
             hintText: 'Password',
             labelText: 'Password',
-            initialValue: password ?? null,
+            initialValue: state.password ?? null,
             validator: (value) {
               String validateBlankPassword =
                   validateEmptyValue(value, 'password');
@@ -146,6 +164,18 @@ class _LoginFormState extends State<LoginForm> {
             obscureText: !this._showPassword,
             controller: this._passwordController,
             focusNode: this._passwordFocusNode,
+            errorText: isFailure
+                ? state.failure.containsErrorForField('password')
+                    ? state.failure
+                        .getErrorsForField('password')
+                        .map((e) => e.message)
+                        .toList()
+                        .join("\n")
+                    : null
+                : null,
+            errorMaxLines: isFailure
+                ? state.failure.getErrorsForField('password').length
+                : null,
           ),
           Container(
             alignment: Alignment.bottomRight,

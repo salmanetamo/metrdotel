@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:metrdotel/onboarding/domain/models/onboard_page_model.dart';
 import 'package:metrdotel/onboarding/presentation/bloc/onboarding_bloc.dart';

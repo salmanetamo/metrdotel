@@ -4,35 +4,48 @@ part of 'signup_cubit.dart';
 class SignupState extends Equatable {
   final String email;
   final String password;
+  final String firstName;
+  final String lastName;
   final String confirmPassword;
   final bool acceptedTermsAndConditions;
   final String message;
   final StateStatus status;
+  final Failure failure;
 
   const SignupState({
     @required this.email,
     @required this.password,
+    @required this.firstName,
+    @required this.lastName,
     @required this.confirmPassword,
     @required this.acceptedTermsAndConditions,
     @required this.message,
     @required this.status,
+    @required this.failure,
   });
 
-  SignupState copyWith(
-      {String email,
-      String password,
-      String confirmPassword,
-      bool acceptedTermsAndConditions,
-      String message,
-      StateStatus status}) {
+  SignupState copyWith({
+    String email,
+    String password,
+    String firstName,
+    String lastName,
+    String confirmPassword,
+    bool acceptedTermsAndConditions,
+    String message,
+    StateStatus status,
+    Failure failure,
+  }) {
     return SignupState(
       email: email ?? this.email,
       password: password ?? this.password,
+      firstName: firstName ?? this.firstName,
+      lastName: lastName ?? this.lastName,
       confirmPassword: confirmPassword ?? this.confirmPassword,
       acceptedTermsAndConditions:
           acceptedTermsAndConditions ?? this.acceptedTermsAndConditions,
       message: message ?? this.message,
       status: status ?? this.status,
+      failure: failure ?? this.failure,
     );
   }
 
@@ -40,14 +53,17 @@ class SignupState extends Equatable {
   List<Object> get props => [
         this.email,
         this.password,
+        this.firstName,
+        this.lastName,
         this.confirmPassword,
         this.acceptedTermsAndConditions,
         this.message,
         this.status,
+        this.failure,
       ];
 
   @override
   String toString() {
-    return '{\n\temail: ${this.email},\n\tpassword: ${this.password},\n\tconfirmPassword: ${this.confirmPassword},\n\tacceptedTermsAndConditions: ${this.acceptedTermsAndConditions},\n\tmessage: ${this.message},\n\tstatus: ${this.status}\n}';
+    return '{\n\tfirstName: ${this.firstName},\n\tlastName: ${this.lastName},\n\temail: ${this.email},\n\tpassword: ${this.password},\n\tconfirmPassword: ${this.confirmPassword},\n\tacceptedTermsAndConditions: ${this.acceptedTermsAndConditions},\n\tmessage: ${this.message},\n\tstatus: ${this.status},\n\tfailure: ${this.failure}\n}';
   }
 }

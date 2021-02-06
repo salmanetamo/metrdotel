@@ -1,24 +1,34 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:metrdotel/core/auth/i_auth_service.dart';
+import 'package:metrdotel/shared/error/failure.dart';
 import 'package:metrdotel/shared/state/state_utils.dart';
+import 'package:metrdotel/signup/domain/models/signup_request.dart';
 
 part 'signup_state.dart';
 
 @injectable
 class SignupCubit extends Cubit<SignupState> {
-  SignupCubit()
+  final IAuthService _authService;
+
+  SignupCubit(this._authService)
       : super(SignupState(
           email: null,
           password: null,
+          firstName: null,
+          lastName: null,
           confirmPassword: null,
           acceptedTermsAndConditions: null,
           message: null,
           status: null,
+          failure: null,
         ));
 
   Future<void> signupWithCredentials({
+    @required String firstName,
+    @required String lastName,
     @required String email,
     @required String password,
     @required String confirmPassword,
@@ -27,11 +37,14 @@ class SignupCubit extends Cubit<SignupState> {
     if (acceptedTermsAndConditions == null || !acceptedTermsAndConditions) {
       emit(
         this.state.copyWith(
-            email: email,
-            password: password,
-            confirmPassword: confirmPassword,
-            message: 'Please accept the Terms and Conditions',
-            status: StateStatus.FAILURE),
+              firstName: firstName,
+              lastName: lastName,
+              email: email,
+              password: password,
+              confirmPassword: confirmPassword,
+              message: 'Please accept the Terms and Conditions',
+              status: StateStatus.FAILURE,
+            ),
       );
     } else {
       emit(
@@ -39,8 +52,30 @@ class SignupCubit extends Cubit<SignupState> {
             .state
             .copyWith(message: 'Loading', status: StateStatus.IN_PROGRESS),
       );
-      await Future.delayed(Duration(seconds: 5));
-      emit(this.state.copyWith(status: StateStatus.SUCCESS));
+
+      var signupResponse = await this._authService.signupWithCredentials(
+            signupRequest: SignupRequest(
+                firstName: state.firstName,
+                lastName: state.lastName,
+                email: state.email,
+                password: state.password,
+                confirmPassword: state.confirmPassword),
+          );
+      signupResponse.fold(
+        (failure) => emit(
+          this.state.copyWith(
+                status: StateStatus.FAILURE,
+                message: failure.message,
+                failure: failure,
+              ),
+        ),
+        (authResponse) => emit(
+          this.state.copyWith(
+                status: StateStatus.SUCCESS,
+                message: authResponse.message,
+              ),
+        ),
+      );
     }
   }
 

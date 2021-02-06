@@ -16,6 +16,8 @@ class _SignupFormState extends State<SignupForm> {
   final _formKey = GlobalKey<FormState>();
   var _passwordKey = GlobalKey<FormFieldState>();
 
+  TextEditingController _firstNameController = TextEditingController();
+  TextEditingController _lastNameController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   TextEditingController _confirmPasswordController = TextEditingController();
@@ -31,7 +33,7 @@ class _SignupFormState extends State<SignupForm> {
     return BlocConsumer<SignupCubit, SignupState>(
       listener: (context, state) {
         if (state.status == StateStatus.FAILURE)
-          showErrorSnackBar(context, state.message);
+          showErrorSnackBar(context, state.message, Duration(seconds: 5));
         else if (state.status == StateStatus.SUCCESS)
           navigateToHomeScreen(context);
       },
@@ -43,16 +45,21 @@ class _SignupFormState extends State<SignupForm> {
           case StateStatus.SUCCESS:
             return Container();
           default:
+            this._firstNameController.text = state.firstName;
+            this._lastNameController.text = state.lastName;
             this._emailController.text = state.email;
             this._passwordController.text = state.password;
             this._confirmPasswordController.text = state.confirmPassword;
-            return this._form();
+            return this._form(state);
         }
       },
     );
   }
 
-  Form _form() {
+  Form _form(SignupState state) {
+    final isFailure =
+        state.status == StateStatus.FAILURE && state.failure != null;
+
     return Form(
       key: _formKey,
       child: Column(
@@ -63,7 +70,7 @@ class _SignupFormState extends State<SignupForm> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                  height: 48.0,
+                  height: 32.0,
                 ),
                 Text(
                   'Create a new',
@@ -77,7 +84,67 @@ class _SignupFormState extends State<SignupForm> {
             ),
           ),
           SizedBox(
-            height: 32.0,
+            height: 24.0,
+          ),
+          textInput(
+            context,
+            key: GlobalKey<FormFieldState>(),
+            hintText: 'First name',
+            labelText: 'First name',
+            validator: (value) {
+              String validateBlankFirstName =
+                  validateEmptyValue(value, 'first name');
+              if (validateBlankFirstName != null) {
+                return validateBlankFirstName;
+              }
+              return null;
+            },
+            controller: this._firstNameController,
+            errorText: isFailure
+                ? state.failure.containsErrorForField('firstName')
+                    ? state.failure
+                        .getErrorsForField('firstName')
+                        .map((e) => e.message)
+                        .toList()
+                        .join("\n")
+                    : null
+                : null,
+            errorMaxLines: isFailure
+                ? state.failure.getErrorsForField('firstName').length
+                : null,
+          ),
+          SizedBox(
+            height: 8.0,
+          ),
+          textInput(
+            context,
+            key: GlobalKey<FormFieldState>(),
+            hintText: 'Last name',
+            labelText: 'Last name',
+            validator: (value) {
+              String validateBlankLastName =
+                  validateEmptyValue(value, 'last name');
+              if (validateBlankLastName != null) {
+                return validateBlankLastName;
+              }
+              return null;
+            },
+            controller: this._lastNameController,
+            errorText: isFailure
+                ? state.failure.containsErrorForField('lastName')
+                    ? state.failure
+                        .getErrorsForField('lastName')
+                        .map((e) => e.message)
+                        .toList()
+                        .join("\n")
+                    : null
+                : null,
+            errorMaxLines: isFailure
+                ? state.failure.getErrorsForField('lastName').length
+                : null,
+          ),
+          SizedBox(
+            height: 16.0,
           ),
           textInput(
             context,
@@ -97,9 +164,21 @@ class _SignupFormState extends State<SignupForm> {
               return null;
             },
             controller: this._emailController,
+            errorText: isFailure
+                ? state.failure.containsErrorForField('email')
+                    ? state.failure
+                        .getErrorsForField('email')
+                        .map((e) => e.message)
+                        .toList()
+                        .join("\n")
+                    : null
+                : null,
+            errorMaxLines: isFailure
+                ? state.failure.getErrorsForField('email').length
+                : null,
           ),
           SizedBox(
-            height: 16.0,
+            height: 8.0,
           ),
           textInput(
             context,
@@ -117,7 +196,7 @@ class _SignupFormState extends State<SignupForm> {
                   validateMinSize(value, 'password', 8);
               if (validateMinSizePassword != null) {
                 return validateMinSizePassword;
-              }              
+              }
 
               return null;
             },
@@ -145,9 +224,21 @@ class _SignupFormState extends State<SignupForm> {
             obscureText: !this._showPassword,
             controller: this._passwordController,
             focusNode: this._passwordFocusNode,
+            errorText: isFailure
+                ? state.failure.containsErrorForField('password')
+                    ? state.failure
+                        .getErrorsForField('password')
+                        .map((e) => e.message)
+                        .toList()
+                        .join("\n")
+                    : null
+                : null,
+            errorMaxLines: isFailure
+                ? state.failure.getErrorsForField('password').length
+                : null,
           ),
           SizedBox(
-            height: 16.0,
+            height: 8.0,
           ),
           textInput(
             context,
@@ -171,19 +262,19 @@ class _SignupFormState extends State<SignupForm> {
             suffixIcon: IconButton(
               icon: Icon(
                 Icons.remove_red_eye,
-                color: this._showPassword
+                color: this._showConfirmPassword
                     ? Theme.of(context).primaryColor
                     : Colors.grey,
               ),
               onPressed: () {
                 setState(() {
-                  this._passwordFocusNode.unfocus();
-                  this._passwordFocusNode.canRequestFocus = false;
-                  this._showPassword = !this._showPassword;
+                  this._confirmPasswordFocusNode.unfocus();
+                  this._confirmPasswordFocusNode.canRequestFocus = false;
+                  this._showConfirmPassword = !this._showConfirmPassword;
                   Future.delayed(
                     Duration(milliseconds: 100),
                     () {
-                      this._passwordFocusNode.canRequestFocus = true;
+                      this._confirmPasswordFocusNode.canRequestFocus = true;
                     },
                   );
                 });
@@ -192,6 +283,18 @@ class _SignupFormState extends State<SignupForm> {
             obscureText: !this._showConfirmPassword,
             controller: this._confirmPasswordController,
             focusNode: this._confirmPasswordFocusNode,
+            errorText: isFailure
+                ? state.failure.containsErrorForField('confirmPassword')
+                    ? state.failure
+                        .getErrorsForField('confirmPassword')
+                        .map((e) => e.message)
+                        .toList()
+                        .join("\n")
+                    : null
+                : null,
+            errorMaxLines: isFailure
+                ? state.failure.getErrorsForField('confirmPassword').length
+                : null,
           ),
           SizedBox(
             height: 16.0,
@@ -273,6 +376,8 @@ class _SignupFormState extends State<SignupForm> {
       final signupCubit = context.read<SignupCubit>();
 
       signupCubit.signupWithCredentials(
+        firstName: this._firstNameController.text,
+        lastName: this._lastNameController.text,
         email: this._emailController.text,
         password: this._passwordController.text,
         confirmPassword: this._confirmPasswordController.text,
