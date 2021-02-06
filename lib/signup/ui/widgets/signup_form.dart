@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:metrdotel/core/routes/functions.dart';
-import 'package:metrdotel/signup/presentation/cubit/signup_cubit.dart';
 import 'package:metrdotel/shared/error/validators.dart';
 import 'package:metrdotel/shared/state/state_utils.dart';
 import 'package:metrdotel/shared/widgets/form_inputs.dart';
 import 'package:metrdotel/shared/widgets/ui_components.dart';
+import 'package:metrdotel/signup/state/signup_cubit.dart';
 
 class SignupForm extends StatefulWidget {
   @override

@@ -1,9 +1,10 @@
 import 'package:auto_route/auto_route_annotations.dart';
-import 'package:metrdotel/home/presentation/screens/home_screen.dart';
-import 'package:metrdotel/login/presentation/screens/login_screen.dart';
-import 'package:metrdotel/onboarding/presentation/screens/onboarding.dart';
-import 'package:metrdotel/signup/presentation/screens/signup_screen.dart';
-import 'package:metrdotel/signup/presentation/screens/widgets/terms_of_use.dart';
+import 'package:metrdotel/home/ui/home_screen.dart';
+import 'package:metrdotel/login/ui/login_screen.dart';
+import 'package:metrdotel/onboarding/ui/onboarding.dart';
+import 'package:metrdotel/password_reset/ui/password_reset_screen.dart';
+import 'package:metrdotel/signup/ui/signup_screen.dart';
+import 'package:metrdotel/signup/ui/widgets/terms_of_use.dart';
 
 @MaterialAutoRouter(
   generateNavigationHelperExtension: true,
@@ -13,6 +14,7 @@ import 'package:metrdotel/signup/presentation/screens/widgets/terms_of_use.dart'
     MaterialRoute(page: SignupScreen),
     MaterialRoute(page: HomeScreen),
     MaterialRoute(page: TermsOfUse),
+    MaterialRoute(page: PasswordResetScreen),
   ],
 )
 class $Router {}

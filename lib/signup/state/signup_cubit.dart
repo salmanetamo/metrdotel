@@ -2,10 +2,10 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:metrdotel/core/auth/i_auth_service.dart';
+import 'package:metrdotel/core/auth/service/i_auth_service.dart';
 import 'package:metrdotel/shared/error/failure.dart';
 import 'package:metrdotel/shared/state/state_utils.dart';
-import 'package:metrdotel/signup/domain/models/signup_request.dart';
+import 'package:metrdotel/signup/model/signup_request.dart';
 
 part 'signup_state.dart';
 

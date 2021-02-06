@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:metrdotel/core/routes/functions.dart';
-import 'package:metrdotel/login/presentation/cubit/login_cubit.dart';
+import 'package:metrdotel/login/state/login_cubit.dart';
 import 'package:metrdotel/shared/error/validators.dart';
 import 'package:metrdotel/shared/state/state_utils.dart';
 import 'package:metrdotel/shared/widgets/form_inputs.dart';
@@ -183,7 +183,9 @@ class _LoginFormState extends State<LoginForm> {
             child: buttonLink(
               context,
               'Forgot password?',
-              onPressed: () {},
+              onPressed: () {
+                navigateToPasswordResetScreen(context);
+              },
             ),
           ),
           SizedBox(

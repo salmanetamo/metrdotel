@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
-import 'package:metrdotel/core/models/auth/auth_response.dart';
-import 'package:metrdotel/login/domain/models/login_request.dart';
+import 'package:metrdotel/core/auth/model/auth_response.dart';
+import 'package:metrdotel/login/model/login_request.dart';
 import 'package:metrdotel/shared/error/failure.dart';
-import 'package:metrdotel/signup/domain/models/signup_request.dart';
+import 'package:metrdotel/signup/model/signup_request.dart';
 
 abstract class IAuthService {
   Future<bool> isLoggedIn();

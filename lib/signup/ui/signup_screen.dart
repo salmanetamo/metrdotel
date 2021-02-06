@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:metrdotel/signup/presentation/screens/widgets/signup_form.dart';
+import 'package:metrdotel/signup/ui/widgets/signup_form.dart';
 
 class SignupScreen extends StatelessWidget {
   const SignupScreen({Key key}) : super(key: key);

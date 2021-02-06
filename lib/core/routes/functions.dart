@@ -17,3 +17,7 @@ void navigateToHomeScreen(BuildContext context) {
 void navigateToTermsOfUseScreen(BuildContext context) {
     ExtendedNavigator.of(context).push(Routes.termsOfUse);
 }
+
+void navigateToPasswordResetScreen(BuildContext context) {
+    ExtendedNavigator.of(context).push(Routes.passwordResetScreen);
+}

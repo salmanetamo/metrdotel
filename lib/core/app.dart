@@ -1,10 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:metrdotel/onboarding/presentation/bloc/onboarding_bloc.dart';
 import 'package:metrdotel/core/routes/router.gr.dart' as router;
 import 'package:metrdotel/core/theme/styles.dart';
-import 'package:metrdotel/signup/presentation/cubit/signup_cubit.dart';
+import 'package:metrdotel/onboarding/state/onboarding_bloc.dart';
+import 'package:metrdotel/signup/state/signup_cubit.dart';
 
 import 'injection/injection.dart';
 

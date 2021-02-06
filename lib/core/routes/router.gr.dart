@@ -9,11 +9,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
-import '../../home/presentation/screens/home_screen.dart';
-import '../../login/presentation/screens/login_screen.dart';
-import '../../onboarding/presentation/screens/onboarding.dart';
-import '../../signup/presentation/screens/signup_screen.dart';
-import '../../signup/presentation/screens/widgets/terms_of_use.dart';
+import '../../home/ui/home_screen.dart';
+import '../../login/ui/login_screen.dart';
+import '../../onboarding/ui/onboarding.dart';
+import '../../password_reset/ui/password_reset_screen.dart';
+import '../../signup/ui/signup_screen.dart';
+import '../../signup/ui/widgets/terms_of_use.dart';
 
 class Routes {
   static const String onboarding = '/';
@@ -21,12 +22,14 @@ class Routes {
   static const String signupScreen = '/signup-screen';
   static const String homeScreen = '/home-screen';
   static const String termsOfUse = '/terms-of-use';
+  static const String passwordResetScreen = '/password-reset-screen';
   static const all = <String>{
     onboarding,
     loginScreen,
     signupScreen,
     homeScreen,
     termsOfUse,
+    passwordResetScreen,
   };
 }
 
@@ -39,6 +42,7 @@ class Router extends RouterBase {
     RouteDef(Routes.signupScreen, page: SignupScreen),
     RouteDef(Routes.homeScreen, page: HomeScreen),
     RouteDef(Routes.termsOfUse, page: TermsOfUse),
+    RouteDef(Routes.passwordResetScreen, page: PasswordResetScreen),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -73,6 +77,12 @@ class Router extends RouterBase {
         settings: data,
       );
     },
+    PasswordResetScreen: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => PasswordResetScreen(),
+        settings: data,
+      );
+    },
   };
 }
 
@@ -90,4 +100,7 @@ extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
   Future<dynamic> pushHomeScreen() => push<dynamic>(Routes.homeScreen);
 
   Future<dynamic> pushTermsOfUse() => push<dynamic>(Routes.termsOfUse);
+
+  Future<dynamic> pushPasswordResetScreen() =>
+      push<dynamic>(Routes.passwordResetScreen);
 }

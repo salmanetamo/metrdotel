@@ -4,8 +4,8 @@ import 'package:injectable/injectable.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart' as DotEnv;
 
 import 'core/app.dart';
-import 'core/bloc/custom_bloc_observer.dart';
 import 'core/injection/injection.dart';
+import 'core/state/custom_bloc_observer.dart';
 
 void main() async {
   Bloc.observer = CustomBlocObserver();

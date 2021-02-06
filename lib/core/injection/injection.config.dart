@@ -10,13 +10,14 @@ import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:logger/logger.dart';
 
-import '../auth/auth_service.dart';
-import '../auth/i_auth_service.dart';
+import '../auth/service/auth_service.dart';
+import '../auth/service/i_auth_service.dart';
 import '../storage/i_storage.dart';
 import 'injectable_modules.dart';
-import '../../login/presentation/cubit/login_cubit.dart';
-import '../../onboarding/presentation/bloc/onboarding_bloc.dart';
-import '../../signup/presentation/cubit/signup_cubit.dart';
+import '../../login/state/login_cubit.dart';
+import '../../onboarding/state/onboarding_bloc.dart';
+import '../../password_reset/state/password_reset_cubit.dart';
+import '../../signup/state/signup_cubit.dart';
 import '../storage/storage.dart';
 
 /// adds generated dependencies
@@ -34,6 +35,7 @@ GetIt $initGetIt(
   gh.factory<IStorage>(() => Storage(get<FlutterSecureStorage>()));
   gh.lazySingleton<Logger>(() => injectableModules.logger);
   gh.factory<OnboardingBloc>(() => OnboardingBloc());
+  gh.factory<PasswordResetCubit>(() => PasswordResetCubit());
   gh.factory<IAuthService>(() => AuthService(
         get<IStorage>(),
         get<Logger>(),

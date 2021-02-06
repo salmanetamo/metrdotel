@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:metrdotel/onboarding/domain/models/onboard_page_model.dart';
-import 'package:metrdotel/onboarding/presentation/bloc/onboarding_bloc.dart';
-import 'package:metrdotel/onboarding/presentation/screens/widgets/drawer_paint.dart';
+import 'package:metrdotel/onboarding/model/onboard_page_model.dart';
+import 'package:metrdotel/onboarding/state/onboarding_bloc.dart';
 
 import 'drawer_circle_paint.dart';
+import 'drawer_paint.dart';
 
 class OnboardPage extends StatefulWidget {
   final PageController pageController;

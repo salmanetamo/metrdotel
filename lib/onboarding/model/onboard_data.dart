@@ -1,6 +1,7 @@
 import 'dart:ui';
 
-import 'package:metrdotel/onboarding/domain/models/onboard_page_model.dart';
+import 'onboard_page_model.dart';
+
 
 List<OnboardPageModel> onboardData  = [
     OnboardPageModel(

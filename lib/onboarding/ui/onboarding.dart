@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:metrdotel/core/routes/functions.dart';
-import 'package:metrdotel/onboarding/data/onboard_data.dart';
-import 'package:metrdotel/onboarding/presentation/bloc/onboarding_bloc.dart';
-
-import 'widgets/onboard_page.dart';
-import 'widgets/page_view_indicator.dart';
+import 'package:metrdotel/onboarding/model/onboard_data.dart';
+import 'package:metrdotel/onboarding/state/onboarding_bloc.dart';
+import 'package:metrdotel/onboarding/ui/widgets/onboard_page.dart';
+import 'package:metrdotel/onboarding/ui/widgets/page_view_indicator.dart';
 
 class Onboarding extends StatefulWidget {
   final PageController pageController = PageController();
@@ -37,7 +36,7 @@ class _OnboardingState extends State<Onboarding> {
     return BlocBuilder<OnboardingBloc, OnboardingState>(
       builder: (context, state) {
         return Scaffold(
-                  body: Stack(
+          body: Stack(
             children: <Widget>[
               PageView.builder(
                 controller: widget.pageController,
@@ -61,8 +60,7 @@ class _OnboardingState extends State<Onboarding> {
                         child: Align(
                           alignment: Alignment.bottomRight,
                           child: Padding(
-                            padding:
-                                const EdgeInsets.only(right: 48.0),
+                            padding: const EdgeInsets.only(right: 48.0),
                             child: FlatButton(
                               height: 16,
                               child: Text(
@@ -94,28 +92,29 @@ class _OnboardingState extends State<Onboarding> {
                   : Align(
                       alignment: Alignment.bottomRight,
                       child: Padding(
-                        padding: const EdgeInsets.only(bottom: 56.0, right: 32.0),
+                        padding:
+                            const EdgeInsets.only(bottom: 56.0, right: 32.0),
                         child: FlatButton(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Text(
-                                  'Start using',
-                                  style: TextStyle(
-                                      fontFamily: 'Poppins',
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black.withOpacity(0.8)),
-                                ),
-                                Icon(Icons.arrow_right_alt,
-                                    color: Theme.of(context).primaryColor,
-                                    size: 24),
-                              ],
-                            ),
-                            onPressed: () => navigateToLoginScreen(context),
-                            ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                'Start using',
+                                style: TextStyle(
+                                    fontFamily: 'Poppins',
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black.withOpacity(0.8)),
+                              ),
+                              Icon(Icons.arrow_right_alt,
+                                  color: Theme.of(context).primaryColor,
+                                  size: 24),
+                            ],
+                          ),
+                          onPressed: () => navigateToLoginScreen(context),
+                        ),
                       ),
                     )
             ],

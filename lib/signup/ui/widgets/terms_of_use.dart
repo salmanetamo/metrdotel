@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:metrdotel/core/routes/functions.dart';
 import 'package:metrdotel/shared/state/state_utils.dart';
 import 'package:metrdotel/shared/widgets/ui_components.dart';
-import 'package:metrdotel/signup/presentation/cubit/signup_cubit.dart';
+import 'package:metrdotel/signup/state/signup_cubit.dart';
 
 class TermsOfUse extends StatefulWidget {
   @override
@@ -15,7 +15,8 @@ class _TermsOfUseState extends State<TermsOfUse> {
   Widget build(BuildContext context) {
     return BlocConsumer<SignupCubit, SignupState>(
       listener: (context, state) {
-        if (state.acceptedTermsAndConditions != null && state.status != StateStatus.FAILURE) {
+        if (state.acceptedTermsAndConditions != null &&
+            state.status != StateStatus.FAILURE) {
           navigateToSignupScreen(context);
         }
       },
@@ -35,7 +36,8 @@ class _TermsOfUseState extends State<TermsOfUse> {
                         width: 72.0,
                         height: 72.0,
                         child: Image.asset(
-                          'images/eating_with_chopsticks.png', // TODO: Replace with correct image
+                          'images/eating_with_chopsticks.png',
+                          // TODO: Replace with correct image
                           fit: BoxFit.fitHeight,
                         ),
                       ),

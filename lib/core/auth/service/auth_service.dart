@@ -5,14 +5,14 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:injectable/injectable.dart';
 import 'package:logger/logger.dart';
 import 'package:http/http.dart' as http;
+import 'package:metrdotel/core/auth/model/auth_response.dart';
+import 'package:metrdotel/core/auth/service/i_auth_service.dart';
 import 'package:metrdotel/core/http/http_utils.dart';
-import 'package:metrdotel/core/auth/i_auth_service.dart';
-import 'package:metrdotel/core/models/auth/auth_response.dart';
 import 'package:metrdotel/core/storage/i_storage.dart';
-import 'package:metrdotel/login/domain/models/login_request.dart';
+import 'package:metrdotel/login/model/login_request.dart';
 import 'package:metrdotel/shared/error/failure.dart';
-import 'package:metrdotel/signup/domain/models/signup_request.dart';
 import 'package:metrdotel/shared/error/api_error/api_error.dart';
+import 'package:metrdotel/signup/model/signup_request.dart';
 
 @Injectable(as: IAuthService)
 class AuthService implements IAuthService {
