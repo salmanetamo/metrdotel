@@ -16,12 +16,12 @@ class Failure extends Equatable {
             : message;
 
   bool containsErrorForField(String field) {
-    return this.error.subErrors.isNotEmpty &&
+    return this.error.subErrors != null && this.error.subErrors.isNotEmpty &&
         this.error.subErrors.where((error) => error.field == field).isNotEmpty;
   }
 
   List<ApiValidationError> getErrorsForField(String field) =>
-      this.error.subErrors.where((error) => error.field == field).toList();
+      this.error.subErrors != null ? this.error.subErrors.where((error) => error.field == field).toList() : List.empty();
 
   @override
   List<Object> get props => [this.message, this.error];

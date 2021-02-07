@@ -36,12 +36,12 @@ class AuthService implements IAuthService {
   Future<Either<Failure, AuthResponse>> loginWithCredentials({
     LoginRequest loginRequest,
   }) async {
-    final url = "${env["BASE_URL"]}auth/login";
+    final url = "auth/login";
 
     this._logger.i("Sending login request");
 
     var response = await this._httpClient.post(
-      url,
+      getHttpUri(endpoint: url),
       body: loginRequest.toJson().encode(),
       headers: {
         'Accept': 'application/json',
@@ -84,12 +84,12 @@ class AuthService implements IAuthService {
   Future<Either<Failure, AuthResponse>> signupWithCredentials({
     SignupRequest signupRequest,
   }) async {
-    final url = "${env["BASE_URL"]}auth/signup";
+    final url = "auth/signup";
 
     this._logger.i("Sending registration request");
 
     var response = await this._httpClient.post(
-      url,
+      getHttpUri(endpoint: url),
       body: signupRequest.toJson().encode(),
       headers: {
         'Accept': 'application/json',

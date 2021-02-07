@@ -12,11 +12,13 @@ import 'package:logger/logger.dart';
 
 import '../auth/service/auth_service.dart';
 import '../auth/service/i_auth_service.dart';
+import '../../password_reset/service/i_password_reset_service.dart';
 import '../storage/i_storage.dart';
 import 'injectable_modules.dart';
 import '../../login/state/login_cubit.dart';
 import '../../onboarding/state/onboarding_bloc.dart';
 import '../../password_reset/state/password_reset_cubit.dart';
+import '../../password_reset/service/password_reset_service.dart';
 import '../../signup/state/signup_cubit.dart';
 import '../storage/storage.dart';
 
@@ -35,13 +37,16 @@ GetIt $initGetIt(
   gh.factory<IStorage>(() => Storage(get<FlutterSecureStorage>()));
   gh.lazySingleton<Logger>(() => injectableModules.logger);
   gh.factory<OnboardingBloc>(() => OnboardingBloc());
-  gh.factory<PasswordResetCubit>(() => PasswordResetCubit());
   gh.factory<IAuthService>(() => AuthService(
         get<IStorage>(),
         get<Logger>(),
         get<Client>(),
       ));
+  gh.factory<IPasswordResetService>(
+      () => PasswordResetService(get<Logger>(), get<Client>()));
   gh.factory<LoginCubit>(() => LoginCubit(get<IAuthService>()));
+  gh.factory<PasswordResetCubit>(
+      () => PasswordResetCubit(get<IPasswordResetService>()));
   gh.factory<SignupCubit>(() => SignupCubit(get<IAuthService>()));
   return get;
 }

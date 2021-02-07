@@ -21,17 +21,22 @@ class _PasswordResetFormState extends State<PasswordResetForm> {
   Widget build(BuildContext context) {
     return BlocConsumer<PasswordResetCubit, PasswordResetState>(
       listener: (context, state) {
-        if (state.status == StateStatus.FAILURE)
+        if (state.status == StateStatus.FAILURE) {
           showErrorSnackBar(context, state.message, Duration(seconds: 5));
-        else if (state.status == StateStatus.SUCCESS)
-          navigateToLoginScreen(context);
+        } else if (state.status == StateStatus.SUCCESS) {
+          showErrorSnackBar(context, state.message, Duration(seconds: 5));
+          Future.delayed(
+            Duration(seconds: 5),
+            () {
+              navigateToLoginScreen(context);
+            },
+          );
+        }
       },
       builder: (context, state) {
         switch (state.status) {
           case StateStatus.IN_PROGRESS:
             return showLoadingSpinner(context);
-          case StateStatus.SUCCESS:
-            return Container();
           default:
             this._emailController.text = state.email;
             return this._form(state);
@@ -72,7 +77,7 @@ class _PasswordResetFormState extends State<PasswordResetForm> {
                   // initialValue: state.email ?? null, TODO: Update
                   validator: (value) {
                     String validateBlankEmail =
-                    validateEmptyValue(value, 'email');
+                        validateEmptyValue(value, 'email');
                     if (validateBlankEmail != null) {
                       return validateBlankEmail;
                     }
@@ -86,12 +91,12 @@ class _PasswordResetFormState extends State<PasswordResetForm> {
                   controller: this._emailController,
                   errorText: isFailure
                       ? state.failure.containsErrorForField('email')
-                      ? state.failure
-                      .getErrorsForField('email')
-                      .map((e) => e.message)
-                      .toList()
-                      .join("\n")
-                      : null
+                          ? state.failure
+                              .getErrorsForField('email')
+                              .map((e) => e.message)
+                              .toList()
+                              .join("\n")
+                          : null
                       : null,
                   errorMaxLines: isFailure
                       ? state.failure.getErrorsForField('email').length
