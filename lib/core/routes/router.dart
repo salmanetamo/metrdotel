@@ -9,10 +9,10 @@ import 'package:metrdotel/signup/ui/widgets/terms_of_use.dart';
 @MaterialAutoRouter(
   generateNavigationHelperExtension: true,
   routes: <AutoRoute>[
-    MaterialRoute(page: Onboarding, initial: true),
+    MaterialRoute(page: Onboarding),
     MaterialRoute(page: LoginScreen),
     MaterialRoute(page: SignupScreen),
-    MaterialRoute(page: HomeScreen),
+    MaterialRoute(page: HomeScreen, initial: true),
     MaterialRoute(page: TermsOfUse),
     MaterialRoute(page: PasswordResetScreen),
   ],

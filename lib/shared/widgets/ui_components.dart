@@ -116,7 +116,8 @@ FlatButton oAuthButton(
   );
 }
 
-void showErrorSnackBar(BuildContext context, String message, Duration duration) {
+void showErrorSnackBar(
+    BuildContext context, String message, Duration duration) {
   Scaffold.of(context).showSnackBar(
     SnackBar(
       content: Text(message),
@@ -131,6 +132,68 @@ Widget showLoadingSpinner(BuildContext context) {
       margin: EdgeInsets.only(top: 350.0),
       child: CircularProgressIndicator(
         backgroundColor: Theme.of(context).primaryColor,
+      ),
+    ),
+  );
+}
+
+Widget iconContainer(
+    {IconData icon,
+    Color iconColor,
+    Color backgroundColor,
+    bool isIconButton = false,
+    Function onPressed}) {
+  return Container(
+    child: isIconButton
+        ? IconButton(
+            icon: Icon(
+              icon,
+              size: 24.0,
+              color: iconColor,
+            ),
+            onPressed: onPressed,
+          )
+        : Icon(
+            icon,
+            size: 24.0,
+            color: iconColor,
+          ),
+    height: 48.0,
+    width: 48.0,
+    decoration: BoxDecoration(
+      color: backgroundColor == Colors.black
+          ? Colors.black
+          : backgroundColor == Colors.white
+              ? Colors.white
+              : Color(0xFFEDEDED),
+      border: Border(
+        top: BorderSide(
+          color: backgroundColor == Colors.black
+              ? Colors.black
+              : Color(0xFFC9C9C9),
+          style: BorderStyle.solid,
+        ),
+        left: BorderSide(
+          color: backgroundColor == Colors.black
+              ? Colors.black
+              : Color(0xFFC9C9C9),
+          style: BorderStyle.solid,
+        ),
+        bottom: BorderSide(
+          color: backgroundColor == Colors.black
+              ? Colors.black
+              : Color(0xFFC9C9C9),
+          style: BorderStyle.solid,
+        ),
+        right: BorderSide(
+          color: backgroundColor == Colors.black
+              ? Colors.black
+              : Color(0xFFC9C9C9),
+          style: BorderStyle.solid,
+        ),
+      ),
+      borderRadius: const BorderRadius.all(
+        const Radius.circular(8.0),
       ),
     ),
   );
