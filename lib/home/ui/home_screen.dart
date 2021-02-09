@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:metrdotel/shared/widgets/app_drawer.dart';
+import 'package:metrdotel/shared/widgets/ui_components.dart';
 
 class HomeScreen extends StatelessWidget {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
@@ -20,7 +21,7 @@ class HomeScreen extends StatelessWidget {
                   IconButton(icon: Icon(Icons.menu_outlined, size: 32.0,), onPressed: () {
                     _scaffoldKey.currentState.openDrawer();
                   },),
-                  Text('<-'),
+                  profilePictureContainer(),
                 ],
               )
             ],

@@ -198,3 +198,18 @@ Widget iconContainer(
     ),
   );
 }
+
+Widget profilePictureContainer() {
+  return ClipRRect(
+    child: Image.asset(
+      'images/facebook_logo.png',
+      // TODO: Replace with correct image
+      fit: BoxFit.fill,
+      width: 48.0,
+      height: 48.0,
+    ),
+    borderRadius: const BorderRadius.all(
+      const Radius.circular(8.0),
+    ),
+  );
+}

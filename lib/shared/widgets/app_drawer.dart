@@ -29,12 +29,6 @@ class AppDrawer extends StatelessWidget {
                           this.scaffoldKey.currentState.openEndDrawer();
                         },
                       ),
-                      // IconButton(
-                      //   icon: iconContainer(icon: Icons.close, iconColor: Colors.black, backgroundColor: Colors.white, isIconButton: true),
-                      //   onPressed: () {
-                      //     this.scaffoldKey.currentState.openEndDrawer();
-                      //   },
-                      // ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
