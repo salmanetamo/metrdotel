@@ -158,8 +158,8 @@ Widget iconContainer(
             size: 24.0,
             color: iconColor,
           ),
-    height: 48.0,
-    width: 48.0,
+    height: 64.0,
+    width: 64.0,
     decoration: BoxDecoration(
       color: backgroundColor == Colors.black
           ? Colors.black
@@ -193,7 +193,7 @@ Widget iconContainer(
         ),
       ),
       borderRadius: const BorderRadius.all(
-        const Radius.circular(8.0),
+        const Radius.circular(16.0),
       ),
     ),
   );

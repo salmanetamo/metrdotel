@@ -5,6 +5,7 @@ TextFormField textInput(
   String hintText = '',
   String labelText = '',
   Widget suffixIcon,
+  Widget prefixIcon,
   bool obscureText = false,
   Function validator,
   GlobalKey<FormFieldState> key,
@@ -35,6 +36,13 @@ TextFormField textInput(
           borderSide:
               BorderSide(color: Color(0xFFffffff), style: BorderStyle.solid),
         ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: const BorderRadius.all(
+            const Radius.circular(16.0),
+          ),
+          borderSide:
+          BorderSide(color: Color(0xFFF9F9F9), style: BorderStyle.solid),
+        ),
         errorBorder: OutlineInputBorder(
           borderRadius: const BorderRadius.all(
             const Radius.circular(16.0),
@@ -50,8 +58,9 @@ TextFormField textInput(
         ),
         enabled: !readOnly,
         filled: true,
-        fillColor: readOnly ? Color(0xFFEDEDED) : Color(0xFFF9F9F9),
+        fillColor: readOnly ? Color(0xFFEDEDED) : Colors.grey[200],
         suffixIcon: suffixIcon ?? null,
+        prefixIcon: prefixIcon ?? null,
         errorMaxLines: errorMaxLines ?? 1,
         errorText: errorText,
       ),
