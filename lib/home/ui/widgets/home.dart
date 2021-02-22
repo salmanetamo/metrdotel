@@ -98,7 +98,11 @@ class _HomeState extends State<Home> {
         scrollDirection: Axis.horizontal,
         children: restaurantFilters.map((RestaurantFilter restaurantFilter) {
           return InkWell(
-            onTap: () {},
+            onTap: () {
+              setState(() {
+                this._selectedFilterIndex = restaurantFilter.index;
+              });
+            },
             child: Padding(
               padding: restaurantFilter.index == 0
                   ? EdgeInsets.only(right: 4.0)
@@ -110,7 +114,9 @@ class _HomeState extends State<Home> {
                 decoration: BoxDecoration(
                   color: Colors.grey[200],
                   borderRadius: BorderRadius.all(Radius.circular(16.0)),
-                  border: this._selectedFilterIndex == restaurantFilter.index ? Border.all(color: Colors.grey[400]) : null,
+                  border: this._selectedFilterIndex == restaurantFilter.index
+                      ? Border.all(color: Colors.grey[400])
+                      : null,
                 ),
                 width: MediaQuery.of(context).size.width / 5,
                 height: MediaQuery.of(context).size.height / 8,
