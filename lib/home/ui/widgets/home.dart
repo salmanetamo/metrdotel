@@ -41,64 +41,50 @@ class _HomeState extends State<Home> {
               ],
             ),
             Column(
-              // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                SizedBox(
+                  height: 32.0,
+                ),
+                Text(
+                  'Hello, Salmane',
+                  style: Theme.of(context).textTheme.headline1,
+                ),
+                Text(
+                  'Let\'s reserve a table for you',
+                  style: Theme.of(context).textTheme.subtitle1,
+                ),
+                SizedBox(
+                  height: 16.0,
+                ),
+                Row(
                   children: [
-                    SizedBox(
-                      height: 32.0,
-                    ),
-                    Text(
-                      'Hello, Salmane',
-                      style: Theme.of(context).textTheme.headline1,
-                    ),
-                    Text(
-                      'Let\'s reserve a table for you',
-                      style: Theme.of(context).textTheme.subtitle1,
+                    Expanded(
+                      child: textInput(context,
+                          hintText: 'Search Cafes',
+                          labelText: 'Search Cafes',
+                          prefixIcon: Icon(Icons.search_rounded)),
                     ),
                     SizedBox(
-                      height: 16.0,
+                      width: 16.0,
                     ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: textInput(context,
-                              hintText: 'Search Cafes',
-                              labelText: 'Search Cafes',
-                              prefixIcon: Icon(Icons.search_rounded)),
-                        ),
-                        SizedBox(
-                          width: 16.0,
-                        ),
-                        iconContainer(
-                          icon: Icons.filter_list_rounded,
-                          iconColor: Colors.white,
-                          backgroundColor: Colors.black,
-                          isIconButton: true,
-                          onPressed: () {},
-                        )
-                      ],
-                    ),
-                    SizedBox(
-                      height: 32.0,
-                    ),
+                    iconContainer(
+                      icon: Icons.filter_list_rounded,
+                      iconColor: Colors.white,
+                      backgroundColor: Colors.black,
+                      isIconButton: true,
+                      onPressed: () {},
+                    )
                   ],
                 ),
-                Expanded(
-                  child: ListView(
-                    scrollDirection: Axis.horizontal,
-                    shrinkWrap: true,
-                    children: [
-                      Text('data'),
-                      Text('data'),
-                      Text('data'),
-                      Text('data'),
-                      Text('data'),
-                    ],
-                  ),
-                )
+                SizedBox(
+                  height: 16.0,
+                ),
               ],
+            ),
+            Container(
+              height: MediaQuery.of(context).size.height / 6,
+              child: restaurantsFilterCardsList,
             )
           ],
         ),
@@ -107,27 +93,65 @@ class _HomeState extends State<Home> {
   }
 
   Widget get restaurantsFilterCardsList {
-    return ListView(
-      scrollDirection: Axis.horizontal,
-      children: restaurantFilters.map((RestaurantFilter restaurantFilter) {
-        return ListTile(
-          title: Column(
-            children: [
-              Image.asset(restaurantFilter.imagePath),
-              Text(restaurantFilter.filterString),
-              this._selectedFilterIndex == restaurantFilter.index
-                  ? Container(
-                      width: 8.0,
-                      height: 8.0,
-                      decoration: BoxDecoration(
-                          color: Theme.of(context).primaryColor,
-                          shape: BoxShape.circle),
-                    )
-                  : Container(),
-            ],
-          ),
-        );
-      }).toList(),
+    return Container(
+      child: ListView(
+        scrollDirection: Axis.horizontal,
+        children: restaurantFilters.map((RestaurantFilter restaurantFilter) {
+          return InkWell(
+            onTap: () {},
+            child: Padding(
+              padding: restaurantFilter.index == 0
+                  ? EdgeInsets.only(right: 4.0)
+                  : restaurantFilter.index == restaurantFilters.length - 1
+                      ? EdgeInsets.only(left: 4.0)
+                      : EdgeInsets.symmetric(horizontal: 4.0),
+              child: Container(
+                padding: EdgeInsets.all(2.0),
+                decoration: BoxDecoration(
+                  color: Colors.grey[200],
+                  borderRadius: BorderRadius.all(Radius.circular(16.0)),
+                  border: this._selectedFilterIndex == restaurantFilter.index ? Border.all(color: Colors.grey[400]) : null,
+                ),
+                width: MediaQuery.of(context).size.width / 5,
+                height: MediaQuery.of(context).size.height / 8,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Image.asset(
+                      restaurantFilter.imagePath,
+                      width: MediaQuery.of(context).size.width / 5,
+                      height: MediaQuery.of(context).size.height / 16,
+                    ),
+                    Column(
+                      children: [
+                        Text(
+                          restaurantFilter.filterString,
+                          style: Theme.of(context).textTheme.overline.copyWith(
+                              fontSize: 10.0,
+                              fontWeight: this._selectedFilterIndex ==
+                                      restaurantFilter.index
+                                  ? FontWeight.bold
+                                  : FontWeight.normal),
+                        ),
+                        this._selectedFilterIndex == restaurantFilter.index
+                            ? Container(
+                                margin: EdgeInsets.only(top: 2.0),
+                                width: 8.0,
+                                height: 8.0,
+                                decoration: BoxDecoration(
+                                    color: Theme.of(context).primaryColor,
+                                    shape: BoxShape.circle),
+                              )
+                            : Container(),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        }).toList(),
+      ),
     );
   }
 }
