@@ -61,6 +61,7 @@ flutter:
     - images/couple.png
     - images/google_logo.png
     - images/facebook_logo.png
+    - images/restaurant.jpg
 
   fonts:
     - family: Poppins

@@ -85,6 +85,19 @@ class _HomeState extends State<Home> {
             Container(
               height: MediaQuery.of(context).size.height / 6,
               child: restaurantsFilterCardsList,
+            ),
+            SizedBox(
+              height: 32.0,
+            ),
+            Expanded(
+              child: ListView(
+                children: [
+                  this.restaurantCard(),
+                  this.restaurantCard(),
+                  this.restaurantCard(),
+                  this.restaurantCard(),
+                ],
+              ),
             )
           ],
         ),
@@ -157,6 +170,121 @@ class _HomeState extends State<Home> {
             ),
           );
         }).toList(),
+      ),
+    );
+  }
+
+  Widget restaurantCard({Color backgroundColor = Colors.grey}) {
+    return Container(
+      padding: EdgeInsets.all(16.0),
+      margin: EdgeInsets.only(bottom: 16.0),
+      decoration: BoxDecoration(
+        color: backgroundColor == Colors.grey ? Colors.grey[200] : Colors.white,
+        borderRadius: BorderRadius.all(Radius.circular(16.0)),
+      ),
+      child: Column(
+        children: [
+          Container(
+            margin: EdgeInsets.only(bottom: 8.0),
+            width: double.infinity,
+            height: MediaQuery.of(context).size.height / 6,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(16.0)),
+              image: DecorationImage(
+                image: AssetImage(
+                  'images/restaurant.jpg',
+                ),
+                fit: BoxFit.fitWidth,
+              ),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  margin: EdgeInsets.only(top: 8.0, left: 8.0),
+                  padding:
+                      EdgeInsets.symmetric(vertical: 2.0, horizontal: 16.0),
+                  decoration: BoxDecoration(
+                    color: Colors.grey[200].withOpacity(0.75),
+                    borderRadius: BorderRadius.all(Radius.circular(16.0)),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Icon(
+                        Icons.access_time,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                      Text('Open now')
+                    ],
+                  ),
+                ),
+                IconButton(
+                  icon: Icon(
+                    Icons.bookmark,
+                    color: Theme.of(context).primaryColor,
+                  ),
+                  onPressed: () {},
+                )
+              ],
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.only(bottom: 8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Restaurant name',
+                  style: Theme.of(context).textTheme.bodyText1,
+                ),
+                Row(
+                  children: [
+                    Text(
+                      '(12)',
+                      style: Theme.of(context).textTheme.subtitle1,
+                    ),
+                    Text(
+                      '3.2',
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyText1
+                          .copyWith(fontWeight: FontWeight.bold),
+                    ),
+                    Icon(Icons.star_border_rounded)
+                  ],
+                )
+              ],
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                child: Row(
+                  children: [
+                    Icon(Icons.location_on),
+                    Text(
+                      'Restaurant address, street',
+                      style: Theme.of(context).textTheme.subtitle1,
+                    ),
+                  ],
+                ),
+              ),
+              Row(
+                children: [
+                  Icon(Icons.attach_money_rounded),
+                  Icon(Icons.attach_money_rounded),
+                  Icon(
+                    Icons.attach_money_rounded,
+                    color: Colors.grey,
+                  ),
+                ],
+              )
+            ],
+          )
+        ],
       ),
     );
   }
