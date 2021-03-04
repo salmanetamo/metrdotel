@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:metrdotel/core/restaurants/model/restaurant.dart';
 import 'package:metrdotel/home/ui/widgets/restaurant_filter.dart';
 import 'package:metrdotel/shared/widgets/app_drawer.dart';
 import 'package:metrdotel/shared/widgets/form_inputs.dart';
@@ -174,7 +175,7 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Widget restaurantCard({Color backgroundColor = Colors.grey}) {
+  Widget restaurantCard(Restaurant restaurant, {Color backgroundColor = Colors.grey}) {
     return Container(
       padding: EdgeInsets.all(16.0),
       margin: EdgeInsets.only(bottom: 16.0),

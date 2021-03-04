@@ -37,4 +37,8 @@ class Restaurant {
     this.reservations,
     this.location,
   });
+
+  // String getOpeningHoursLabel() {
+  //
+  // }
 }
