@@ -1,4 +1,4 @@
-import 'package:metrdotel/core/orders/model/OrderItem.dart';
+import 'package:metrdotel/core/orders/model/order_item.dart';
 
 class Order {
   final String id;

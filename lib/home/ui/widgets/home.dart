@@ -93,10 +93,10 @@ class _HomeState extends State<Home> {
             Expanded(
               child: ListView(
                 children: [
-                  this.restaurantCard(),
-                  this.restaurantCard(),
-                  this.restaurantCard(),
-                  this.restaurantCard(),
+                  // this.restaurantCard(),
+                  // this.restaurantCard(),
+                  // this.restaurantCard(),
+                  // this.restaurantCard(),
                 ],
               ),
             )
@@ -217,7 +217,7 @@ class _HomeState extends State<Home> {
                         Icons.access_time,
                         color: Theme.of(context).primaryColor,
                       ),
-                      Text('Open now')
+                      Text(restaurant.getOpeningHoursLabel())
                     ],
                   ),
                 ),
@@ -237,7 +237,7 @@ class _HomeState extends State<Home> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Restaurant name',
+                  restaurant.name,
                   style: Theme.of(context).textTheme.bodyText1,
                 ),
                 Row(
