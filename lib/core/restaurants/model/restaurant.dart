@@ -39,7 +39,7 @@ class Restaurant {
     this.location,
   });
 
-  String getOpeningHoursLabel() {
+  String get openingHoursLabel {
     var now = DateTime.now();
     var dayOfWeek = DateTimeHelperService.getDayOfWeekFromIndex(now.weekday);
 
@@ -75,4 +75,116 @@ class Restaurant {
       return "Closed";
     }
   }
+
+  double get averageRating {
+    return this.reviews.isEmpty ? 0.0 : this.reviews
+        .map((review) => review.rating)
+        .fold(0.0, (value1, value2) => value1 + value2) / reviews.length;
+  }
 }
+
+// TODO: remove
+List<Restaurant> restaurants = List.of(
+    [
+      Restaurant(
+        id : "c7bdebd57582652838b9ec7049e4bc0e4a165fc8",
+        amenities : List.of([
+          Amenity.AIR_CONDITIONING, Amenity.PARKING, Amenity.TV
+        ]),
+        type : PlaceType.CAFE,
+        coverImage : "",
+        openingHours : {
+          "MONDAY": [
+            {
+              "start": "08AM",
+              "end": "08PM"
+            },
+            {
+              "start": "08AM",
+              "end": "08PM"
+            }
+          ],
+          "TUESDAY": [
+            {
+              "start": "08AM",
+              "end": "08PM"
+            }
+          ]
+        },
+        priceRange : 2,
+        name : "La Rougaille",
+        description : "Restaurant creole magnifique a prix abordables",
+        reviews : List.empty(),
+        menu : List.empty(),
+        orders : List.empty(),
+        reservations : List.empty(),
+        location : Location(name: "Grand Baie", longitude: 12.9, latitude: 34.95),
+      ),Restaurant(
+        id : "c7bdebd57582652838b9ec7049e4bc0e4a165fc8",
+        amenities : List.of([
+          Amenity.AIR_CONDITIONING, Amenity.PARKING, Amenity.TV
+        ]),
+        type : PlaceType.CAFE,
+        coverImage : "",
+        openingHours : {
+          "MONDAY": [
+            {
+              "start": "08AM",
+              "end": "08PM"
+            },
+            {
+              "start": "08AM",
+              "end": "08PM"
+            }
+          ],
+          "TUESDAY": [
+            {
+              "start": "08AM",
+              "end": "08PM"
+            }
+          ]
+        },
+        priceRange : 2,
+        name : "La Rougaille",
+        description : "Restaurant creole magnifique a prix abordables",
+        reviews : List.empty(),
+        menu : List.empty(),
+        orders : List.empty(),
+        reservations : List.empty(),
+        location : Location(name: "Grand Baie", longitude: 12.9, latitude: 34.95),
+      ),Restaurant(
+        id : "c7bdebd57582652838b9ec7049e4bc0e4a165fc8",
+        amenities : List.of([
+          Amenity.AIR_CONDITIONING, Amenity.PARKING, Amenity.TV
+        ]),
+        type : PlaceType.CAFE,
+        coverImage : "",
+        openingHours : {
+          "MONDAY": [
+            {
+              "start": "08AM",
+              "end": "08PM"
+            },
+            {
+              "start": "08AM",
+              "end": "08PM"
+            }
+          ],
+          "TUESDAY": [
+            {
+              "start": "08AM",
+              "end": "08PM"
+            }
+          ]
+        },
+        priceRange : 2,
+        name : "La Rougaille",
+        description : "Restaurant creole magnifique a prix abordables",
+        reviews : List.empty(),
+        menu : List.empty(),
+        orders : List.empty(),
+        reservations : List.empty(),
+        location : Location(name: "Grand Baie", longitude: 12.9, latitude: 34.95),
+      ),
+    ]
+);

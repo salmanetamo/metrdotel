@@ -92,12 +92,7 @@ class _HomeState extends State<Home> {
             ),
             Expanded(
               child: ListView(
-                children: [
-                  // this.restaurantCard(),
-                  // this.restaurantCard(),
-                  // this.restaurantCard(),
-                  // this.restaurantCard(),
-                ],
+                children: restaurants.map((restaurant) => this.restaurantCard(restaurant)).toList(),
               ),
             )
           ],
@@ -217,16 +212,16 @@ class _HomeState extends State<Home> {
                         Icons.access_time,
                         color: Theme.of(context).primaryColor,
                       ),
-                      Text(restaurant.getOpeningHoursLabel())
+                      Text(restaurant.openingHoursLabel)
                     ],
                   ),
                 ),
                 IconButton(
                   icon: Icon(
-                    Icons.bookmark,
+                    true ? Icons.bookmark : Icons.bookmark_border,// TODO: Check whether saved
                     color: Theme.of(context).primaryColor,
                   ),
-                  onPressed: () {},
+                  onPressed: () {}, // TODO: Save restaurant
                 )
               ],
             ),
@@ -243,11 +238,11 @@ class _HomeState extends State<Home> {
                 Row(
                   children: [
                     Text(
-                      '(12)',
+                      '(${restaurant.reviews.length})',
                       style: Theme.of(context).textTheme.subtitle1,
                     ),
                     Text(
-                      '3.2',
+                      '${restaurant.averageRating}',
                       style: Theme.of(context)
                           .textTheme
                           .bodyText1
@@ -267,7 +262,7 @@ class _HomeState extends State<Home> {
                   children: [
                     Icon(Icons.location_on),
                     Text(
-                      'Restaurant address, street',
+                      '${restaurant.location.name}', // TODO: Figure out location based on coordinates
                       style: Theme.of(context).textTheme.subtitle1,
                     ),
                   ],
