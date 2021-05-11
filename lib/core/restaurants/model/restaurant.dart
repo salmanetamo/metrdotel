@@ -1,3 +1,4 @@
+import 'package:json_annotation/json_annotation.dart';
 import 'package:metrdotel/core/orders/model/order.dart';
 import 'package:metrdotel/core/reservations/model/reservation.dart';
 import 'package:metrdotel/core/reviews/model/review.dart';
@@ -8,6 +9,9 @@ import 'menu_item.dart';
 import 'place_type.dart';
 import 'location.dart';
 
+part 'restaurant.g.dart';
+
+@JsonSerializable(explicitToJson: true)
 class Restaurant {
   final String id;
   final List<Amenity> amenities;
@@ -38,6 +42,10 @@ class Restaurant {
     this.reservations,
     this.location,
   });
+
+  factory Restaurant.fromJson(Map<String, dynamic> json) => _$RestaurantFromJson(json);
+
+  Map<String, dynamic> toJson() => _$RestaurantToJson(this);
 
   String get openingHoursLabel {
     var now = DateTime.now();
@@ -82,109 +90,3 @@ class Restaurant {
         .fold(0.0, (value1, value2) => value1 + value2) / reviews.length;
   }
 }
-
-// TODO: remove
-List<Restaurant> restaurants = List.of(
-    [
-      Restaurant(
-        id : "c7bdebd57582652838b9ec7049e4bc0e4a165fc8",
-        amenities : List.of([
-          Amenity.AIR_CONDITIONING, Amenity.PARKING, Amenity.TV
-        ]),
-        type : PlaceType.CAFE,
-        coverImage : "",
-        openingHours : {
-          "MONDAY": [
-            {
-              "start": "08AM",
-              "end": "08PM"
-            },
-            {
-              "start": "08AM",
-              "end": "08PM"
-            }
-          ],
-          "TUESDAY": [
-            {
-              "start": "08AM",
-              "end": "08PM"
-            }
-          ]
-        },
-        priceRange : 2,
-        name : "La Rougaille",
-        description : "Restaurant creole magnifique a prix abordables",
-        reviews : List.empty(),
-        menu : List.empty(),
-        orders : List.empty(),
-        reservations : List.empty(),
-        location : Location(name: "Grand Baie", longitude: 12.9, latitude: 34.95),
-      ),Restaurant(
-        id : "c7bdebd57582652838b9ec7049e4bc0e4a165fc8",
-        amenities : List.of([
-          Amenity.AIR_CONDITIONING, Amenity.PARKING, Amenity.TV
-        ]),
-        type : PlaceType.CAFE,
-        coverImage : "",
-        openingHours : {
-          "MONDAY": [
-            {
-              "start": "08AM",
-              "end": "08PM"
-            },
-            {
-              "start": "08AM",
-              "end": "08PM"
-            }
-          ],
-          "TUESDAY": [
-            {
-              "start": "08AM",
-              "end": "08PM"
-            }
-          ]
-        },
-        priceRange : 2,
-        name : "La Rougaille",
-        description : "Restaurant creole magnifique a prix abordables",
-        reviews : List.empty(),
-        menu : List.empty(),
-        orders : List.empty(),
-        reservations : List.empty(),
-        location : Location(name: "Grand Baie", longitude: 12.9, latitude: 34.95),
-      ),Restaurant(
-        id : "c7bdebd57582652838b9ec7049e4bc0e4a165fc8",
-        amenities : List.of([
-          Amenity.AIR_CONDITIONING, Amenity.PARKING, Amenity.TV
-        ]),
-        type : PlaceType.CAFE,
-        coverImage : "",
-        openingHours : {
-          "MONDAY": [
-            {
-              "start": "08AM",
-              "end": "08PM"
-            },
-            {
-              "start": "08AM",
-              "end": "08PM"
-            }
-          ],
-          "TUESDAY": [
-            {
-              "start": "08AM",
-              "end": "08PM"
-            }
-          ]
-        },
-        priceRange : 2,
-        name : "La Rougaille",
-        description : "Restaurant creole magnifique a prix abordables",
-        reviews : List.empty(),
-        menu : List.empty(),
-        orders : List.empty(),
-        reservations : List.empty(),
-        location : Location(name: "Grand Baie", longitude: 12.9, latitude: 34.95),
-      ),
-    ]
-);

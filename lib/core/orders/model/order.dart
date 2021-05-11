@@ -1,5 +1,10 @@
 import 'package:metrdotel/core/orders/model/order_item.dart';
 
+import 'package:json_annotation/json_annotation.dart';
+
+part 'order.g.dart';
+
+@JsonSerializable(explicitToJson: true)
 class Order {
   final String id;
   final String restaurantId;
@@ -18,4 +23,8 @@ class Order {
     this.waiterTip,
     this.dateTime,
   });
+
+  factory Order.fromJson(Map<String, dynamic> json) => _$OrderFromJson(json);
+
+  Map<String, dynamic> toJson() => _$OrderToJson(this);
 }

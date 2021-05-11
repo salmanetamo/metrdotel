@@ -1,3 +1,8 @@
+import 'package:json_annotation/json_annotation.dart';
+
+part 'order_item.g.dart';
+
+@JsonSerializable()
 class OrderItem {
   final String id;
   final String menuItemId;
@@ -10,4 +15,8 @@ class OrderItem {
     this.orderId,
     this.quantity,
   });
+
+  factory OrderItem.fromJson(Map<String, dynamic> json) => _$OrderItemFromJson(json);
+
+  Map<String, dynamic> toJson() => _$OrderItemToJson(this);
 }

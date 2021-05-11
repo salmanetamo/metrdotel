@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-
+// TODO: Use JsonSerializable for Json conversion
 class SignupRequest {
   final String firstName;
   final String lastName;

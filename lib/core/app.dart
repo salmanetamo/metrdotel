@@ -7,6 +7,7 @@ import 'package:metrdotel/onboarding/state/onboarding_bloc.dart';
 import 'package:metrdotel/signup/state/signup_cubit.dart';
 
 import 'injection/injection.dart';
+import 'restaurants/state/restaurant_bloc.dart';
 
 class App extends StatelessWidget {
   const App({Key key}) : super(key: key);
@@ -17,6 +18,7 @@ class App extends StatelessWidget {
       providers: [
         BlocProvider(create: (_) => getIt<OnboardingBloc>()),
         BlocProvider(create: (_) => getIt<SignupCubit>()),
+        BlocProvider(create: (_) => getIt<RestaurantBloc>()),
       ],
       child: MaterialApp(
         title: 'Metrdotel',
