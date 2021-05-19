@@ -1,6 +1,6 @@
-import 'package:metrdotel/core/orders/model/order_item.dart';
-
 import 'package:json_annotation/json_annotation.dart';
+
+import 'order_item.dart';
 
 part 'order.g.dart';
 

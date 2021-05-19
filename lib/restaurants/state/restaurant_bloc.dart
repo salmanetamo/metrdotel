@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:metrdotel/core/restaurants/model/restaurant.dart';
-import 'package:metrdotel/core/restaurants/service/i_restaurant_service.dart';
+import 'package:metrdotel/restaurants/model/restaurant.dart';
+import 'package:metrdotel/restaurants/service/i_restaurant_service.dart';
 import 'package:metrdotel/shared/error/failure.dart';
 import 'package:metrdotel/shared/state/state_utils.dart';
 

@@ -4,10 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:metrdotel/core/routes/router.gr.dart' as router;
 import 'package:metrdotel/core/theme/styles.dart';
 import 'package:metrdotel/onboarding/state/onboarding_bloc.dart';
+import 'package:metrdotel/restaurants/state/restaurant_bloc.dart';
 import 'package:metrdotel/signup/state/signup_cubit.dart';
 
 import 'injection/injection.dart';
-import 'restaurants/state/restaurant_bloc.dart';
 
 class App extends StatelessWidget {
   const App({Key key}) : super(key: key);

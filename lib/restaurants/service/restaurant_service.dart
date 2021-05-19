@@ -6,7 +6,7 @@ import 'package:logger/logger.dart';
 import 'package:http/http.dart' as http;
 import 'package:metrdotel/core/auth/service/i_auth_service.dart';
 import 'package:metrdotel/core/http/http_utils.dart';
-import 'package:metrdotel/core/restaurants/model/restaurant.dart';
+import 'package:metrdotel/restaurants/model/restaurant.dart';
 import 'package:metrdotel/shared/error/failure.dart';
 import 'package:metrdotel/shared/error/api_error/api_error.dart';
 

@@ -1,10 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:metrdotel/core/injection/injection.dart';
-import 'package:metrdotel/core/restaurants/model/restaurant.dart';
-import 'package:metrdotel/core/restaurants/state/restaurant_bloc.dart';
 import 'package:metrdotel/home/ui/widgets/restaurant_filter.dart';
+import 'package:metrdotel/restaurants/model/restaurant.dart';
+import 'package:metrdotel/restaurants/state/restaurant_bloc.dart';
 import 'package:metrdotel/shared/state/state_utils.dart';
 import 'package:metrdotel/shared/widgets/app_drawer.dart';
 import 'package:metrdotel/shared/widgets/form_inputs.dart';

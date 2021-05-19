@@ -1,7 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:metrdotel/core/orders/model/order.dart';
-import 'package:metrdotel/core/reservations/model/reservation.dart';
-import 'package:metrdotel/core/reviews/model/review.dart';
+import 'package:metrdotel/orders/model/order.dart';
+import 'package:metrdotel/reservations/model/reservation.dart';
+import 'package:metrdotel/reviews/model/review.dart';
 import 'package:metrdotel/shared/utils/service/datetime_helper_service.dart';
 
 import 'amenity.dart';
