@@ -17,10 +17,10 @@ import '../../signup/ui/signup_screen.dart';
 import '../../signup/ui/widgets/terms_of_use.dart';
 
 class Routes {
-  static const String onboarding = '/Onboarding';
+  static const String onboarding = '/';
   static const String loginScreen = '/login-screen';
   static const String signupScreen = '/signup-screen';
-  static const String homeScreen = '/';
+  static const String homeScreen = '/home-screen';
   static const String termsOfUse = '/terms-of-use';
   static const String passwordResetScreen = '/password-reset-screen';
   static const all = <String>{
