@@ -15,13 +15,13 @@ class Order {
   final DateTime dateTime;
 
   Order({
-    this.id,
-    this.restaurantId,
-    this.userId,
-    this.items,
-    this.discount,
-    this.waiterTip,
-    this.dateTime,
+    required this.id,
+    required this.restaurantId,
+    required this.userId,
+    required this.items,
+    required this.discount,
+    required this.waiterTip,
+    required this.dateTime,
   });
 
   factory Order.fromJson(Map<String, dynamic> json) => _$OrderFromJson(json);

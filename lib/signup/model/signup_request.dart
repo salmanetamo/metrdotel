@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 // TODO: Use JsonSerializable for Json conversion
 class SignupRequest {
   final String firstName;
@@ -8,11 +7,11 @@ class SignupRequest {
   final String confirmPassword;
 
   const SignupRequest({
-    @required this.firstName,
-    @required this.lastName,
-    @required this.email,
-    @required this.password,
-    @required this.confirmPassword,
+    required this.firstName,
+    required this.lastName,
+    required this.email,
+    required this.password,
+    required this.confirmPassword,
   });
 
   Map<String, dynamic> toJson() {

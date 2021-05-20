@@ -23,8 +23,8 @@ class LoginCubit extends Cubit<LoginState> {
         ));
 
   Future<void> loginWithCredentials({
-    @required String email,
-    @required String password,
+    required String email,
+    required String password,
   }) async {
     emit(
       this.state.copyWith(

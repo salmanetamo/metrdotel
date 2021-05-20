@@ -13,7 +13,7 @@ class OnboardPage extends StatefulWidget {
   final bool showDrawer;
 
   const OnboardPage(
-      {Key key, @required this.pageModel, @required this.pageController, @required this.showDrawer})
+      {Key? key, required this.pageModel, required this.pageController, required this.showDrawer})
       : super(key: key);
 
   @override

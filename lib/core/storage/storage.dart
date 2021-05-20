@@ -14,22 +14,22 @@ class Storage implements IStorage{
   }
 
   @override
-  Future<dynamic> get({String key}) {
+  Future<dynamic> get({required String key}) {
     return this._storage.read(key: key);
   }
 
   @override
-  Future<void> remove({String key}) {
+  Future<void> remove({required String key}) {
     return this._storage.delete(key: key);
   }
 
   @override
-  Future<void> set({String key, value}) {
+  Future<void> set({required String key, value}) {
     return this._storage.write(key: key, value: value);
   }
 
   @override
-  Future<bool> contains({String key}) {
+  Future<bool> contains({required String key}) {
     return this._storage.containsKey(key: key);
   }
 }

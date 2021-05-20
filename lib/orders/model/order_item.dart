@@ -10,10 +10,10 @@ class OrderItem {
   final int quantity;
 
   OrderItem({
-    this.id,
-    this.menuItemId,
-    this.orderId,
-    this.quantity,
+    required this.id,
+    required this.menuItemId,
+    required this.orderId,
+    required this.quantity,
   });
 
   factory OrderItem.fromJson(Map<String, dynamic> json) => _$OrderItemFromJson(json);

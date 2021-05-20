@@ -9,8 +9,8 @@ extension JsonEncoding on Map {
 }
 
 Uri getHttpUri({
-  String endpoint,
-  Map<String, String> queryParameters,
+  required String endpoint,
+  Map<String, String>? queryParameters,
   bool withPrefix = false,
   bool isHttp = true,
 }) {

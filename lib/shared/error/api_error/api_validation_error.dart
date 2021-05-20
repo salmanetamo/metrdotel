@@ -10,9 +10,9 @@ class ApiValidationError {
   final dynamic rejectedValue;
 
   ApiValidationError({
-    this.object,
-    this.message,
-    this.field,
+    required this.object,
+    required this.message,
+    required this.field,
     this.rejectedValue,
   });
 

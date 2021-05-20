@@ -7,7 +7,7 @@ import 'home_screen_view.dart';
 class HomeScreenPage extends StatefulWidget {
   final HomeScreenDestination destination;
 
-  const HomeScreenPage({Key key, this.destination}) : super(key: key);
+  const HomeScreenPage({Key? key, required this.destination}) : super(key: key);
 
   @override
   _HomeScreenPageState createState() => _HomeScreenPageState();

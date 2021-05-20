@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:metrdotel/core/routes/router.gr.dart' as router;
@@ -10,7 +9,8 @@ import 'package:metrdotel/signup/state/signup_cubit.dart';
 import 'injection/injection.dart';
 
 class App extends StatelessWidget {
-  const App({Key key}) : super(key: key);
+  App({Key? key}) : super(key: key);
+  final _appRouter = router.Router();
 
   @override
   Widget build(BuildContext context) {
@@ -20,13 +20,13 @@ class App extends StatelessWidget {
         BlocProvider(create: (_) => getIt<SignupCubit>()),
         BlocProvider(create: (_) => getIt<RestaurantBloc>()),
       ],
-      child: MaterialApp(
+      child: MaterialApp.router(
         title: 'Metrdotel',
         debugShowCheckedModeBanner: false,
         theme: appTheme(),
-        builder: ExtendedNavigator.builder(
-          router: router.Router(),
-        ),
+          routerDelegate: _appRouter.delegate(),
+          routeInformationParser: _appRouter.defaultRouteParser(),
+
       )
     );
   }

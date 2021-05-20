@@ -8,7 +8,7 @@ class CustomBlocObserver extends BlocObserver {
   final Logger _logger = Logger();
 
   @override
-  void onEvent(Bloc bloc, Object event) {
+  void onEvent(Bloc bloc, Object? event) {
     _logger.i(event);
     _logger.i(bloc.state);
     super.onEvent(bloc, event);
@@ -21,11 +21,10 @@ class CustomBlocObserver extends BlocObserver {
     super.onTransition(bloc, transition);
   }
 
-  
   @override
-  void onChange(Cubit cubit, Change change) {
+  void onChange(BlocBase bloc, Change change) {
     _logger.i('current state: ${change.currentState}');
     _logger.i('next state: ${change.nextState.toString()}');
-    super.onChange(cubit, change);
+    super.onChange(bloc, change);
   }
 }

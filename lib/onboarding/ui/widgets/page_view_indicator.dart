@@ -9,10 +9,10 @@ class PageViewIndicator extends StatefulWidget {
   final Color color;
 
   const PageViewIndicator({
-    Key key,
-    @required this.controller,
-    @required this.itemCount,
-    this.color,
+    Key? key,
+    required this.controller,
+    required this.itemCount,
+    required this.color,
   }) : super(key: key);
 
   @override

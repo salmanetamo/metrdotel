@@ -11,11 +11,11 @@ class Review {
   final int rating;
 
   Review({
-    this.id,
-    this.restaurantId,
-    this.reviewerId,
-    this.comment,
-    this.rating,
+    required this.id,
+    required this.restaurantId,
+    required this.reviewerId,
+    required this.comment,
+    required this.rating,
   });
 
   factory Review.fromJson(Map<String, dynamic> json) => _$ReviewFromJson(json);

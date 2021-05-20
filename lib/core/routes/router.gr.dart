@@ -4,103 +4,99 @@
 // AutoRouteGenerator
 // **************************************************************************
 
-// ignore_for_file: public_member_api_docs
+import 'package:auto_route/auto_route.dart' as _i1;
+import 'package:flutter/material.dart' as _i2;
 
-import 'package:auto_route/auto_route.dart';
-import 'package:flutter/material.dart';
+import '../../home/ui/home_screen.dart' as _i6;
+import '../../login/ui/login_screen.dart' as _i4;
+import '../../onboarding/ui/onboarding.dart' as _i3;
+import '../../password_reset/ui/password_reset_screen.dart' as _i8;
+import '../../signup/ui/signup_screen.dart' as _i5;
+import '../../signup/ui/widgets/terms_of_use.dart' as _i7;
 
-import '../../home/ui/home_screen.dart';
-import '../../login/ui/login_screen.dart';
-import '../../onboarding/ui/onboarding.dart';
-import '../../password_reset/ui/password_reset_screen.dart';
-import '../../signup/ui/signup_screen.dart';
-import '../../signup/ui/widgets/terms_of_use.dart';
+class Router extends _i1.RootStackRouter {
+  Router([_i2.GlobalKey<_i2.NavigatorState>? navigatorKey])
+      : super(navigatorKey);
 
-class Routes {
-  static const String onboarding = '/';
-  static const String loginScreen = '/login-screen';
-  static const String signupScreen = '/signup-screen';
-  static const String homeScreen = '/home-screen';
-  static const String termsOfUse = '/terms-of-use';
-  static const String passwordResetScreen = '/password-reset-screen';
-  static const all = <String>{
-    onboarding,
-    loginScreen,
-    signupScreen,
-    homeScreen,
-    termsOfUse,
-    passwordResetScreen,
+  @override
+  final Map<String, _i1.PageFactory> pagesMap = {
+    OnboardingRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
+        routeData: routeData,
+        builder: (_) {
+          return _i3.Onboarding();
+        }),
+    LoginScreenRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
+        routeData: routeData,
+        builder: (_) {
+          return const _i4.LoginScreen();
+        }),
+    SignupScreenRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
+        routeData: routeData,
+        builder: (_) {
+          return const _i5.SignupScreen();
+        }),
+    HomeScreenRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
+        routeData: routeData,
+        builder: (_) {
+          return _i6.HomeScreen();
+        }),
+    TermsOfUseRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
+        routeData: routeData,
+        builder: (_) {
+          return _i7.TermsOfUse();
+        }),
+    PasswordResetScreenRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
+        routeData: routeData,
+        builder: (_) {
+          return _i8.PasswordResetScreen();
+        })
   };
+
+  @override
+  List<_i1.RouteConfig> get routes => [
+        _i1.RouteConfig(OnboardingRoute.name, path: '/'),
+        _i1.RouteConfig(LoginScreenRoute.name, path: '/login-screen'),
+        _i1.RouteConfig(SignupScreenRoute.name, path: '/signup-screen'),
+        _i1.RouteConfig(HomeScreenRoute.name, path: '/home-screen'),
+        _i1.RouteConfig(TermsOfUseRoute.name, path: '/terms-of-use'),
+        _i1.RouteConfig(PasswordResetScreenRoute.name,
+            path: '/password-reset-screen')
+      ];
 }
 
-class Router extends RouterBase {
-  @override
-  List<RouteDef> get routes => _routes;
-  final _routes = <RouteDef>[
-    RouteDef(Routes.onboarding, page: Onboarding),
-    RouteDef(Routes.loginScreen, page: LoginScreen),
-    RouteDef(Routes.signupScreen, page: SignupScreen),
-    RouteDef(Routes.homeScreen, page: HomeScreen),
-    RouteDef(Routes.termsOfUse, page: TermsOfUse),
-    RouteDef(Routes.passwordResetScreen, page: PasswordResetScreen),
-  ];
-  @override
-  Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
-  final _pagesMap = <Type, AutoRouteFactory>{
-    Onboarding: (data) {
-      return MaterialPageRoute<dynamic>(
-        builder: (context) => Onboarding(),
-        settings: data,
-      );
-    },
-    LoginScreen: (data) {
-      return MaterialPageRoute<dynamic>(
-        builder: (context) => const LoginScreen(),
-        settings: data,
-      );
-    },
-    SignupScreen: (data) {
-      return MaterialPageRoute<dynamic>(
-        builder: (context) => const SignupScreen(),
-        settings: data,
-      );
-    },
-    HomeScreen: (data) {
-      return MaterialPageRoute<dynamic>(
-        builder: (context) => HomeScreen(),
-        settings: data,
-      );
-    },
-    TermsOfUse: (data) {
-      return MaterialPageRoute<dynamic>(
-        builder: (context) => TermsOfUse(),
-        settings: data,
-      );
-    },
-    PasswordResetScreen: (data) {
-      return MaterialPageRoute<dynamic>(
-        builder: (context) => PasswordResetScreen(),
-        settings: data,
-      );
-    },
-  };
+class OnboardingRoute extends _i1.PageRouteInfo {
+  const OnboardingRoute() : super(name, path: '/');
+
+  static const String name = 'OnboardingRoute';
 }
 
-/// ************************************************************************
-/// Navigation helper methods extension
-/// *************************************************************************
+class LoginScreenRoute extends _i1.PageRouteInfo {
+  const LoginScreenRoute() : super(name, path: '/login-screen');
 
-extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
-  Future<dynamic> pushOnboarding() => push<dynamic>(Routes.onboarding);
+  static const String name = 'LoginScreenRoute';
+}
 
-  Future<dynamic> pushLoginScreen() => push<dynamic>(Routes.loginScreen);
+class SignupScreenRoute extends _i1.PageRouteInfo {
+  const SignupScreenRoute() : super(name, path: '/signup-screen');
 
-  Future<dynamic> pushSignupScreen() => push<dynamic>(Routes.signupScreen);
+  static const String name = 'SignupScreenRoute';
+}
 
-  Future<dynamic> pushHomeScreen() => push<dynamic>(Routes.homeScreen);
+class HomeScreenRoute extends _i1.PageRouteInfo {
+  const HomeScreenRoute() : super(name, path: '/home-screen');
 
-  Future<dynamic> pushTermsOfUse() => push<dynamic>(Routes.termsOfUse);
+  static const String name = 'HomeScreenRoute';
+}
 
-  Future<dynamic> pushPasswordResetScreen() =>
-      push<dynamic>(Routes.passwordResetScreen);
+class TermsOfUseRoute extends _i1.PageRouteInfo {
+  const TermsOfUseRoute() : super(name, path: '/terms-of-use');
+
+  static const String name = 'TermsOfUseRoute';
+}
+
+class PasswordResetScreenRoute extends _i1.PageRouteInfo {
+  const PasswordResetScreenRoute()
+      : super(name, path: '/password-reset-screen');
+
+  static const String name = 'PasswordResetScreenRoute';
 }

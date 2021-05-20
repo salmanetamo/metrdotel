@@ -2,18 +2,18 @@ part of 'restaurant_bloc.dart';
 
 @immutable
 class RestaurantState {
-  final List<Restaurant> restaurants;
-  final Restaurant restaurant;
-  final String message;
-  final StateStatus status;
-  final Failure failure;
+  final List<Restaurant>? restaurants;
+  final Restaurant? restaurant;
+  final String? message;
+  final StateStatus? status;
+  final Failure? failure;
 
   const RestaurantState({
-    @required this.restaurants,
-    @required this.restaurant,
-    @required this.message,
-    @required this.status,
-    @required this.failure,
+    required this.restaurants,
+    required this.restaurant,
+    required this.message,
+    required this.status,
+    required this.failure,
   });
 
   RestaurantState copyWith({

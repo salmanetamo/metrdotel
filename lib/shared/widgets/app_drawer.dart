@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 import 'package:metrdotel/shared/widgets/ui_components.dart';
 
 class AppDrawer extends StatelessWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
 
-  const AppDrawer({Key key, @required this.scaffoldKey}) : super(key: key);
+  const AppDrawer({Key? key, required this.scaffoldKey}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +25,7 @@ class AppDrawer extends StatelessWidget {
                         backgroundColor: Colors.white,
                         isIconButton: true,
                         onPressed: () {
-                          this.scaffoldKey.currentState.openEndDrawer();
+                          this.scaffoldKey.currentState!.openEndDrawer();
                         },
                       ),
                       Column(
@@ -87,7 +86,7 @@ class AppDrawer extends StatelessWidget {
     );
   }
 
-  Widget _drawerItem({IconData icon, String text, GestureTapCallback onTap}) {
+  Widget _drawerItem({required IconData icon, required String text, required GestureTapCallback onTap}) {
     return ListTile(
       title: Row(
         children: <Widget>[

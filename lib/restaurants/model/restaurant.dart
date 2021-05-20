@@ -28,22 +28,23 @@ class Restaurant {
   final Location location;
 
   Restaurant({
-    this.id,
-    this.amenities,
-    this.type,
-    this.coverImage,
-    this.openingHours,
-    this.priceRange,
-    this.name,
-    this.description,
-    this.reviews,
-    this.menu,
-    this.orders,
-    this.reservations,
-    this.location,
+    required this.id,
+    required this.amenities,
+    required this.type,
+    required this.coverImage,
+    required this.openingHours,
+    required this.priceRange,
+    required this.name,
+    required this.description,
+    required this.reviews,
+    required this.menu,
+    required this.orders,
+    required this.reservations,
+    required this.location,
   });
 
-  factory Restaurant.fromJson(Map<String, dynamic> json) => _$RestaurantFromJson(json);
+  factory Restaurant.fromJson(Map<String, dynamic> json) =>
+      _$RestaurantFromJson(json);
 
   Map<String, dynamic> toJson() => _$RestaurantToJson(this);
 
@@ -52,15 +53,15 @@ class Restaurant {
     var dayOfWeek = DateTimeHelperService.getDayOfWeekFromIndex(now.weekday);
 
     // Closed if no opening hours for today
-    if(!this.openingHours.containsKey(dayOfWeek)) {
+    if (!this.openingHours.containsKey(dayOfWeek)) {
       return "Closed";
     }
     var openingHoursForToday = this.openingHours[dayOfWeek];
 
     // Checking if current time still before closing times
     var afterAllEndTimes = true;
-    for (var openingHourEntry in openingHoursForToday) {
-      if (int.parse(openingHourEntry["end"]) < now.hour) {
+    for (var openingHourEntry in openingHoursForToday!) {
+      if (int.parse(openingHourEntry["end"]!) < now.hour) {
         afterAllEndTimes = false;
       }
     }
@@ -70,14 +71,14 @@ class Restaurant {
 
     // Check if current time within start and end times
     var entryWithValidEnd = openingHoursForToday
-        .where((entry) => int.parse(entry["end"]) > now.hour)
+        .where((entry) => int.parse(entry["end"]!) > now.hour)
         .first;
-    var startHour = int.parse(entryWithValidEnd["start"]);
+    var startHour = int.parse(entryWithValidEnd["start"]!);
     if (startHour <= now.hour) {
       return "Open";
     } else {
       var difference = now.hour - startHour;
-      if(difference <= 6) {
+      if (difference <= 6) {
         return "Opens in $difference hours";
       }
       return "Closed";
@@ -85,8 +86,12 @@ class Restaurant {
   }
 
   double get averageRating {
-    return this.reviews.isEmpty ? 0.0 : this.reviews
-        .map((review) => review.rating)
-        .fold(0.0, (value1, value2) => value1 + value2) / reviews.length;
+    if (this.reviews.isEmpty) return 0.0;
+    List<int> ratings = this.reviews.map((review) => review.rating).toList();
+    var sum = 0;
+    for (var rating in ratings) {
+      sum += rating;
+    }
+    return sum / reviews.length;
   }
 }

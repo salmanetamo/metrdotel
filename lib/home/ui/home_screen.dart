@@ -9,8 +9,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen>
     with TickerProviderStateMixin<HomeScreen> {
-  List<Key> _viewKeys;
-  List<AnimationController> _faders;
+  late List<Key> _viewKeys;
+  late List<AnimationController> _faders;
   int _currentIndex = 0;
 
   @override

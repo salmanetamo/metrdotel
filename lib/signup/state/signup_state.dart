@@ -2,38 +2,38 @@ part of 'signup_cubit.dart';
 
 @immutable
 class SignupState extends Equatable {
-  final String email;
-  final String password;
-  final String firstName;
-  final String lastName;
-  final String confirmPassword;
-  final bool acceptedTermsAndConditions;
-  final String message;
-  final StateStatus status;
-  final Failure failure;
+  final String? email;
+  final String? password;
+  final String? firstName;
+  final String? lastName;
+  final String? confirmPassword;
+  final bool? acceptedTermsAndConditions;
+  final String? message;
+  final StateStatus? status;
+  final Failure? failure;
 
   const SignupState({
-    @required this.email,
-    @required this.password,
-    @required this.firstName,
-    @required this.lastName,
-    @required this.confirmPassword,
-    @required this.acceptedTermsAndConditions,
-    @required this.message,
-    @required this.status,
-    @required this.failure,
+    required this.email,
+    required this.password,
+    required this.firstName,
+    required this.lastName,
+    required this.confirmPassword,
+    required this.acceptedTermsAndConditions,
+    required this.message,
+    required this.status,
+    required this.failure,
   });
 
   SignupState copyWith({
-    String email,
-    String password,
-    String firstName,
-    String lastName,
-    String confirmPassword,
-    bool acceptedTermsAndConditions,
-    String message,
-    StateStatus status,
-    Failure failure,
+    String? email,
+    String? password,
+    String? firstName,
+    String? lastName,
+    String? confirmPassword,
+    bool? acceptedTermsAndConditions,
+    String? message,
+    StateStatus? status,
+    Failure? failure,
   }) {
     return SignupState(
       email: email ?? this.email,
@@ -51,15 +51,15 @@ class SignupState extends Equatable {
 
   @override
   List<Object> get props => [
-        this.email,
-        this.password,
-        this.firstName,
-        this.lastName,
-        this.confirmPassword,
-        this.acceptedTermsAndConditions,
-        this.message,
-        this.status,
-        this.failure,
+        this.email as Object,
+        this.password as Object,
+        this.firstName as Object,
+        this.lastName as Object,
+        this.confirmPassword as Object,
+        this.acceptedTermsAndConditions as Object,
+        this.message as Object,
+        this.status as Object,
+        this.failure as Object,
       ];
 
   @override

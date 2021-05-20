@@ -23,7 +23,7 @@ class PasswordResetCubit extends Cubit<PasswordResetState> {
           ),
         );
 
-  Future<void> sendPasswordResetRequest({@required String email}) async {
+  Future<void> sendPasswordResetRequest({required String email}) async {
     emit(
       this.state.copyWith(
             email: email,

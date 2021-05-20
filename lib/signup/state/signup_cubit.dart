@@ -14,25 +14,27 @@ class SignupCubit extends Cubit<SignupState> {
   final IAuthService _authService;
 
   SignupCubit(this._authService)
-      : super(SignupState(
-          email: null,
-          password: null,
-          firstName: null,
-          lastName: null,
-          confirmPassword: null,
-          acceptedTermsAndConditions: null,
-          message: null,
-          status: null,
-          failure: null,
-        ));
+      : super(
+          SignupState(
+            email: null,
+            password: null,
+            firstName: null,
+            lastName: null,
+            confirmPassword: null,
+            acceptedTermsAndConditions: null,
+            message: null,
+            status: null,
+            failure: null,
+          ),
+        );
 
   Future<void> signupWithCredentials({
-    @required String firstName,
-    @required String lastName,
-    @required String email,
-    @required String password,
-    @required String confirmPassword,
-    @required bool acceptedTermsAndConditions,
+    required String firstName,
+    required String lastName,
+    required String email,
+    required String password,
+    required String confirmPassword,
+    required bool acceptedTermsAndConditions,
   }) async {
     if (acceptedTermsAndConditions == null || !acceptedTermsAndConditions) {
       emit(
@@ -55,11 +57,12 @@ class SignupCubit extends Cubit<SignupState> {
 
       var signupResponse = await this._authService.signupWithCredentials(
             signupRequest: SignupRequest(
-                firstName: state.firstName,
-                lastName: state.lastName,
-                email: state.email,
-                password: state.password,
-                confirmPassword: state.confirmPassword),
+              firstName: state.firstName!,
+              lastName: state.lastName!,
+              email: state.email!,
+              password: state.password!,
+              confirmPassword: state.confirmPassword!,
+            ),
           );
       signupResponse.fold(
         (failure) => emit(

@@ -6,5 +6,5 @@ abstract class OnboardingEvent {}
 class ColorChangedEvent extends OnboardingEvent {
   final Color color;
 
-  ColorChangedEvent({@required this.color});
+  ColorChangedEvent({required this.color});
 }

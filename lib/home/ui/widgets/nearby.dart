@@ -30,7 +30,7 @@ class _NearbyState extends State<Nearby> {
                     size: 32.0,
                   ),
                   onPressed: () {
-                    _scaffoldKey.currentState.openDrawer();
+                    _scaffoldKey.currentState!.openDrawer();
                   },
                 ),
                 profilePictureContainer(),

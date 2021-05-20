@@ -4,8 +4,8 @@ FlatButton button(
   BuildContext context,
   String text, {
   Color color = Colors.black,
-  Function onPressed,
-  bool disabled,
+  void Function()? onPressed,
+  bool? disabled,
 }) {
   return FlatButton(
     child: Text(text),
@@ -38,7 +38,8 @@ FlatButton button(
   );
 }
 
-FlatButton buttonLink(BuildContext context, String text, {Function onPressed}) {
+FlatButton buttonLink(BuildContext context, String text,
+    {void Function()? onPressed}) {
   return FlatButton(
     child: Text(
       text,
@@ -55,7 +56,7 @@ FlatButton buttonLink(BuildContext context, String text, {Function onPressed}) {
   );
 }
 
-FlatButton facebookButton(Function onPressed) {
+FlatButton facebookButton(void Function()? onPressed) {
   return oAuthButton(
     'Facebook',
     'facebook_logo.png',
@@ -66,7 +67,7 @@ FlatButton facebookButton(Function onPressed) {
   );
 }
 
-FlatButton googleButton(Function onPressed) {
+FlatButton googleButton(void Function()? onPressed) {
   return oAuthButton(
     'Google',
     'google_logo.png',
@@ -83,7 +84,7 @@ FlatButton oAuthButton(
   Color fillColor,
   Color borderColor,
   Color textColor,
-  Function onPressed,
+  void Function()? onPressed,
 ) {
   return FlatButton(
     height: 48.0,
@@ -137,12 +138,13 @@ Widget showLoadingSpinner(BuildContext context) {
   );
 }
 
-Widget iconContainer(
-    {IconData icon,
-    Color iconColor,
-    Color backgroundColor,
-    bool isIconButton = false,
-    Function onPressed}) {
+Widget iconContainer({
+  required IconData icon,
+  required Color iconColor,
+  Color? backgroundColor,
+  bool isIconButton = false,
+  void Function()? onPressed,
+}) {
   return Container(
     child: isIconButton
         ? IconButton(

@@ -30,7 +30,7 @@ class _ReservedState extends State<Reserved> {
                     size: 32.0,
                   ),
                   onPressed: () {
-                    _scaffoldKey.currentState.openDrawer();
+                    _scaffoldKey.currentState!.openDrawer();
                   },
                 ),
                 profilePictureContainer(),

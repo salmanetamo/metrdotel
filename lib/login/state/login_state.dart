@@ -2,22 +2,22 @@ part of 'login_cubit.dart';
 
 @immutable
 class LoginState extends Equatable {
-  final String email;
-  final String password;
-  final String message;
-  final StateStatus status;
-  final Failure failure;
+  final String? email;
+  final String? password;
+  final String? message;
+  final StateStatus? status;
+  final Failure? failure;
 
   const LoginState({
-    @required this.email,
-    @required this.password,
-    @required this.message,
-    @required this.status,
-    @required this.failure,
+    required this.email,
+    required this.password,
+    required this.message,
+    required this.status,
+    required this.failure,
   });
 
   LoginState copyWith(
-      {String email, String password, String message, StateStatus status, Failure failure,}) {
+      {String? email, String? password, String? message, StateStatus? status, Failure? failure,}) {
     return LoginState(
       email: email ?? this.email,
       password: password ?? this.password,
@@ -29,11 +29,11 @@ class LoginState extends Equatable {
 
   @override
   List<Object> get props => [
-        this.email,
-        this.password,
-        this.message,
-        this.status,
-        this.failure,
+        this.email as Object,
+        this.password as Object,
+        this.message as Object,
+        this.status as Object,
+        this.failure as Object,
       ];
 
   @override

@@ -62,7 +62,7 @@ class _TermsOfUseState extends State<TermsOfUse> {
                             'These Website Standard Terms and Conditions written on this webpage shall manage your use of our website, Webiste Name accessible at Metrdotel.',
                             style: Theme.of(context)
                                 .textTheme
-                                .bodyText1
+                                .bodyText1!
                                 .copyWith(color: Colors.black.withOpacity(0.5)),
                           ),
                           SizedBox(height: 8.0),
@@ -70,7 +70,7 @@ class _TermsOfUseState extends State<TermsOfUse> {
                             'These Terms will be applied fully and affect to your use of this Website. By using this Website, you agreed to accept all terms and conditions written in here. You must not use this Website if you disagree with any of these Website Standard Terms and Conditions.',
                             style: Theme.of(context)
                                 .textTheme
-                                .bodyText1
+                                .bodyText1!
                                 .copyWith(color: Colors.black.withOpacity(0.5)),
                           ),
                           SizedBox(height: 8.0),
@@ -78,7 +78,7 @@ class _TermsOfUseState extends State<TermsOfUse> {
                             'Minors or people below 18 years old are not allowed to use this Website.',
                             style: Theme.of(context)
                                 .textTheme
-                                .bodyText1
+                                .bodyText1!
                                 .copyWith(color: Colors.black.withOpacity(0.5)),
                           ),
                           SizedBox(height: 8.0),
@@ -86,7 +86,7 @@ class _TermsOfUseState extends State<TermsOfUse> {
                             'Other than the content you own, under these Terms, Company Name and/or its licensors own all the intellectual property rights and materials contained in this Website.',
                             style: Theme.of(context)
                                 .textTheme
-                                .bodyText1
+                                .bodyText1!
                                 .copyWith(color: Colors.black.withOpacity(0.5)),
                           ),
                           SizedBox(height: 8.0),
@@ -94,7 +94,7 @@ class _TermsOfUseState extends State<TermsOfUse> {
                             'Certain areas of this Website are restricted from being access by you and Company Name may further restrict access by you to any areas of this Website, at any time, in absolute discretion. Any user ID and password you may have for this Website are confidential and you must maintain confidentiality as well.',
                             style: Theme.of(context)
                                 .textTheme
-                                .bodyText1
+                                .bodyText1!
                                 .copyWith(color: Colors.black.withOpacity(0.5)),
                           ),
                           SizedBox(height: 8.0),

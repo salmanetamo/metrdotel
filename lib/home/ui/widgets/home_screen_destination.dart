@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 import 'package:metrdotel/home/ui/widgets/reserved.dart';
 import 'package:metrdotel/home/ui/widgets/saved.dart';
 
@@ -13,10 +12,10 @@ class HomeScreenDestination {
   final Widget widget;
 
   HomeScreenDestination({
-    @required this.title,
-    @required this.icon,
-    @required this.index,
-    @required this.widget,
+    required this.title,
+    required this.icon,
+    required this.index,
+    required this.widget,
   });
 }
 

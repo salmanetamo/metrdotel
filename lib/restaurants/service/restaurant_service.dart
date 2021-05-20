@@ -41,6 +41,7 @@ class RestaurantService implements IRestaurantService {
       return right(
           (jsonDecode(response.body) as List)
               .map((restaurantJson) => Restaurant.fromJson(restaurantJson))
+              .toList()
       );
     } else {
       this._logger.e("Something went wrong while fetching restaurants");

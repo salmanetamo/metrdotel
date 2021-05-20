@@ -19,7 +19,7 @@ class PasswordResetService implements IPasswordResetService {
   PasswordResetService(this._logger, this._httpClient);
 
   @override
-  Future<Either<Failure, PasswordResetRequestResponse>> sendPasswordResetRequest({PasswordResetRequest passwordResetRequest}) async {
+  Future<Either<Failure, PasswordResetRequestResponse>> sendPasswordResetRequest({required PasswordResetRequest passwordResetRequest}) async {
     final url = "auth/request-password-reset";
 
     this._logger.i("Sending password reset request");

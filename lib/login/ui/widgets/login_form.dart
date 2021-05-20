@@ -26,7 +26,7 @@ class _LoginFormState extends State<LoginForm> {
     return BlocConsumer<LoginCubit, LoginState>(
       listener: (context, state) {
         if (state.status == StateStatus.FAILURE)
-          showErrorSnackBar(context, state.message, Duration(seconds: 5));
+          showErrorSnackBar(context, state.message!, Duration(seconds: 5));
         else if (state.status == StateStatus.SUCCESS)
           navigateToHomeScreen(context);
       },
@@ -37,8 +37,8 @@ class _LoginFormState extends State<LoginForm> {
           case StateStatus.SUCCESS:
             return Container();
           default:
-            this._emailController.text = state.email;
-            this._passwordController.text = state.password;
+            this._emailController.text = state.email ?? '';
+            this._passwordController.text = state.password ?? '';
             return this._form(state);
         }
       },
@@ -81,7 +81,7 @@ class _LoginFormState extends State<LoginForm> {
                   'Metrdotel',
                   style: Theme.of(context)
                       .textTheme
-                      .headline1
+                      .headline1!
                       .copyWith(color: Theme.of(context).primaryColor),
                 ),
               ],
@@ -97,12 +97,12 @@ class _LoginFormState extends State<LoginForm> {
             labelText: 'Email',
             initialValue: state.email ?? null,
             validator: (value) {
-              String validateBlankEmail = validateEmptyValue(value, 'email');
+              String? validateBlankEmail = validateEmptyValue(value!, 'email');
               if (validateBlankEmail != null) {
                 return validateBlankEmail;
               }
 
-              String emailValidation = validateEmail(value);
+              String? emailValidation = validateEmail(value);
               if (emailValidation != null) {
                 return emailValidation;
               }
@@ -110,8 +110,8 @@ class _LoginFormState extends State<LoginForm> {
             },
             controller: this._emailController,
             errorText: isFailure
-                ? state.failure.containsErrorForField('email')
-                    ? state.failure
+                ? state.failure!.containsErrorForField('email')
+                    ? state.failure!
                         .getErrorsForField('email')
                         .map((e) => e.message)
                         .toList()
@@ -119,7 +119,7 @@ class _LoginFormState extends State<LoginForm> {
                     : null
                 : null,
             errorMaxLines: isFailure
-                ? state.failure.getErrorsForField('email').length
+                ? state.failure!.getErrorsForField('email').length
                 : null,
           ),
           SizedBox(
@@ -132,8 +132,8 @@ class _LoginFormState extends State<LoginForm> {
             labelText: 'Password',
             initialValue: state.password ?? null,
             validator: (value) {
-              String validateBlankPassword =
-                  validateEmptyValue(value, 'password');
+              String? validateBlankPassword =
+                  validateEmptyValue(value!, 'password');
               if (validateBlankPassword != null) {
                 return validateBlankPassword;
               }
@@ -165,8 +165,8 @@ class _LoginFormState extends State<LoginForm> {
             controller: this._passwordController,
             focusNode: this._passwordFocusNode,
             errorText: isFailure
-                ? state.failure.containsErrorForField('password')
-                    ? state.failure
+                ? state.failure!.containsErrorForField('password')
+                    ? state.failure!
                         .getErrorsForField('password')
                         .map((e) => e.message)
                         .toList()
@@ -174,7 +174,7 @@ class _LoginFormState extends State<LoginForm> {
                     : null
                 : null,
             errorMaxLines: isFailure
-                ? state.failure.getErrorsForField('password').length
+                ? state.failure!.getErrorsForField('password').length
                 : null,
           ),
           Container(
@@ -248,7 +248,7 @@ class _LoginFormState extends State<LoginForm> {
   }
 
   void _onSubmit() {
-    if (this._formKey.currentState.validate()) {
+    if (this._formKey.currentState!.validate()) {
       final loginCubit = context.read<LoginCubit>();
 
       loginCubit.loginWithCredentials(

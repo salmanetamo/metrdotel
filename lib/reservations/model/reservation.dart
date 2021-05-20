@@ -11,11 +11,11 @@ class Reservation {
   final int numberOfPeople;
 
   Reservation({
-    this.id,
-    this.restaurantId,
-    this.userId,
-    this.dateTime,
-    this.numberOfPeople,
+    required this.id,
+    required this.restaurantId,
+    required this.userId,
+    required this.dateTime,
+    required this.numberOfPeople,
   });
 
   factory Reservation.fromJson(Map<String, dynamic> json) => _$ReservationFromJson(json);

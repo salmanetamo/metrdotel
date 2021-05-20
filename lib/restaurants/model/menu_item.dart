@@ -13,13 +13,13 @@ class MenuItem {
   final List<String> types;
 
   MenuItem({
-    this.id,
-    this.restaurantId,
-    this.name,
-    this.picture,
-    this.price,
-    this.description,
-    this.types,
+    required this.id,
+    required this.restaurantId,
+    required this.name,
+    required this.picture,
+    required this.price,
+    required this.description,
+    required this.types,
   });
 
   factory MenuItem.fromJson(Map<String, dynamic> json) => _$MenuItemFromJson(json);

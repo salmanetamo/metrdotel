@@ -11,9 +11,7 @@ Reservation _$ReservationFromJson(Map<String, dynamic> json) {
     id: json['id'] as String,
     restaurantId: json['restaurantId'] as String,
     userId: json['userId'] as String,
-    dateTime: json['dateTime'] == null
-        ? null
-        : DateTime.parse(json['dateTime'] as String),
+    dateTime: DateTime.parse(json['dateTime'] as String),
     numberOfPeople: json['numberOfPeople'] as int,
   );
 }
@@ -23,6 +21,6 @@ Map<String, dynamic> _$ReservationToJson(Reservation instance) =>
       'id': instance.id,
       'restaurantId': instance.restaurantId,
       'userId': instance.userId,
-      'dateTime': instance.dateTime?.toIso8601String(),
+      'dateTime': instance.dateTime.toIso8601String(),
       'numberOfPeople': instance.numberOfPeople,
     };

@@ -44,7 +44,7 @@ class _HomeState extends State<Home> {
                         size: 32.0,
                       ),
                       onPressed: () {
-                        _scaffoldKey.currentState.openDrawer();
+                        _scaffoldKey.currentState!.openDrawer();
                       },
                     ),
                     profilePictureContainer(),
@@ -125,13 +125,13 @@ class _HomeState extends State<Home> {
         return showLoadingSpinner(context);
       case StateStatus.SUCCESS:
         return ListView(
-          children: state.restaurants
+          children: state.restaurants!
               .map((restaurant) => this.restaurantCard(restaurant))
               .toList(),
         );
       case StateStatus.FAILURE:
         return Container(
-          child: Text(state.failure.message),
+          child: Text(state.failure!.message!),
         );
       default:
         return Container();
@@ -153,13 +153,13 @@ class _HomeState extends State<Home> {
               return showLoadingSpinner(context);
             case StateStatus.SUCCESS:
               return ListView(
-                children: state.restaurants
+                children: state.restaurants!
                     .map((restaurant) => this.restaurantCard(restaurant))
                     .toList(),
               );
             case StateStatus.FAILURE:
               return Container(
-                child: Text(state.failure.message),
+                child: Text(state.failure!.message!),
               );
             default:
               return Container();
@@ -191,7 +191,7 @@ class _HomeState extends State<Home> {
                     color: Colors.grey[200],
                     borderRadius: BorderRadius.all(Radius.circular(16.0)),
                     border: this._selectedFilterIndex == restaurantFilter.index
-                        ? Border.all(color: Colors.grey[400])
+                        ? Border.all(color: Colors.grey[400]!)
                         : null,
                   ),
                   width: MediaQuery
@@ -223,7 +223,7 @@ class _HomeState extends State<Home> {
                             style: Theme
                                 .of(context)
                                 .textTheme
-                                .overline
+                                .overline!
                                 .copyWith(
                                 fontSize: 10.0,
                                 fontWeight: this._selectedFilterIndex ==
@@ -292,7 +292,7 @@ class _HomeState extends State<Home> {
                     padding:
                     EdgeInsets.symmetric(vertical: 2.0, horizontal: 16.0),
                     decoration: BoxDecoration(
-                      color: Colors.grey[200].withOpacity(0.75),
+                      color: Colors.grey[200]!.withOpacity(0.75),
                       borderRadius: BorderRadius.all(Radius.circular(16.0)),
                     ),
                     child: Row(
@@ -346,7 +346,7 @@ class _HomeState extends State<Home> {
                         style: Theme
                             .of(context)
                             .textTheme
-                            .bodyText1
+                            .bodyText1!
                             .copyWith(fontWeight: FontWeight.bold),
                       ),
                       Icon(Icons.star_border_rounded)

@@ -6,8 +6,8 @@ part 'api_error.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class ApiError {
-  final String message;
-  final List<ApiValidationError> subErrors;
+  final String? message;
+  final List<ApiValidationError>? subErrors;
 
   ApiError({this.message, this.subErrors});
 

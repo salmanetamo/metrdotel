@@ -3,21 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:metrdotel/core/routes/router.gr.dart';
 
 void navigateToLoginScreen(BuildContext context) {
-    ExtendedNavigator.of(context).push(Routes.loginScreen);
+    AutoRouter.of(context).push(LoginScreenRoute());
 }
 
 void navigateToSignupScreen(BuildContext context) {
-    ExtendedNavigator.of(context).push(Routes.signupScreen);
+    AutoRouter.of(context).push(SignupScreenRoute());
 }
 
 void navigateToHomeScreen(BuildContext context) {
-    ExtendedNavigator.of(context).push(Routes.homeScreen);
+    AutoRouter.of(context).push(HomeScreenRoute());
 }
 
 void navigateToTermsOfUseScreen(BuildContext context) {
-    ExtendedNavigator.of(context).push(Routes.termsOfUse);
+    AutoRouter.of(context).push(TermsOfUseRoute());
 }
 
 void navigateToPasswordResetScreen(BuildContext context) {
-    ExtendedNavigator.of(context).push(Routes.passwordResetScreen);
+    AutoRouter.of(context).push(PasswordResetScreenRoute());
 }

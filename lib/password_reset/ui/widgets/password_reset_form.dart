@@ -22,9 +22,9 @@ class _PasswordResetFormState extends State<PasswordResetForm> {
     return BlocConsumer<PasswordResetCubit, PasswordResetState>(
       listener: (context, state) {
         if (state.status == StateStatus.FAILURE) {
-          showErrorSnackBar(context, state.message, Duration(seconds: 5));
+          showErrorSnackBar(context, state.message!, Duration(seconds: 5));
         } else if (state.status == StateStatus.SUCCESS) {
-          showErrorSnackBar(context, state.message, Duration(seconds: 5));
+          showErrorSnackBar(context, state.message!, Duration(seconds: 5));
           Future.delayed(
             Duration(seconds: 5),
             () {
@@ -38,7 +38,7 @@ class _PasswordResetFormState extends State<PasswordResetForm> {
           case StateStatus.IN_PROGRESS:
             return showLoadingSpinner(context);
           default:
-            this._emailController.text = state.email;
+            this._emailController.text = state.email ?? '';
             return this._form(state);
         }
       },
@@ -76,13 +76,13 @@ class _PasswordResetFormState extends State<PasswordResetForm> {
                   labelText: 'Email',
                   // initialValue: state.email ?? null, TODO: Update
                   validator: (value) {
-                    String validateBlankEmail =
-                        validateEmptyValue(value, 'email');
+                    String? validateBlankEmail =
+                        validateEmptyValue(value!, 'email');
                     if (validateBlankEmail != null) {
                       return validateBlankEmail;
                     }
 
-                    String emailValidation = validateEmail(value);
+                    String? emailValidation = validateEmail(value);
                     if (emailValidation != null) {
                       return emailValidation;
                     }
@@ -90,8 +90,8 @@ class _PasswordResetFormState extends State<PasswordResetForm> {
                   },
                   controller: this._emailController,
                   errorText: isFailure
-                      ? state.failure.containsErrorForField('email')
-                          ? state.failure
+                      ? state.failure!.containsErrorForField('email')
+                          ? state.failure!
                               .getErrorsForField('email')
                               .map((e) => e.message)
                               .toList()
@@ -99,7 +99,7 @@ class _PasswordResetFormState extends State<PasswordResetForm> {
                           : null
                       : null,
                   errorMaxLines: isFailure
-                      ? state.failure.getErrorsForField('email').length
+                      ? state.failure!.getErrorsForField('email').length
                       : null,
                 ),
               ],
@@ -129,7 +129,7 @@ class _PasswordResetFormState extends State<PasswordResetForm> {
   }
 
   void _onSubmit() {
-    if (this._formKey.currentState.validate()) {
+    if (this._formKey.currentState!.validate()) {
       final passwordResetCubitCubit = context.read<PasswordResetCubit>();
 
       passwordResetCubitCubit.sendPasswordResetRequest(

@@ -22,7 +22,7 @@ class _OnboardingState extends State<Onboarding> {
     super.initState();
     widget.pageController.addListener(() {
       if (widget.pageController.page != null &&
-          widget.pageController.page.floor() >= onboardData.length - 1) {
+          widget.pageController.page!.floor() >= onboardData.length - 1) {
         setState(() {
           _showSkipButton = false;
           _showStartUsingButton = true;
@@ -67,7 +67,7 @@ class _OnboardingState extends State<Onboarding> {
                                 'SKIP',
                                 style: Theme.of(context)
                                     .textTheme
-                                    .subtitle1
+                                    .subtitle1!
                                     .copyWith(fontSize: 16),
                               ),
                               onPressed: () => navigateToLoginScreen(context),

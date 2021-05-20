@@ -1,15 +1,12 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
-
 class RestaurantFilter {
   final String imagePath;
   final String filterString;
   final int index;
 
   RestaurantFilter({
-    @required this.filterString,
-    @required this.imagePath,
-    @required this.index,
+    required this.filterString,
+    required this.imagePath,
+    required this.index,
   });
 }
 

@@ -22,18 +22,18 @@ class AuthService implements IAuthService {
   AuthService(this._storage, this._logger, this._httpClient);
 
   @override
-  Future<String> getToken() {
-    return this._storage.get(key: 'token');
+  Future<String>? getToken() {
+    return this._storage.get(key: 'token') as Future<String>;
   }
 
   @override
   Future<bool> isLoggedIn() {
-    return this._storage.get(key: 'loggedIn');
+    return this._storage.get(key: 'loggedIn') as Future<bool>;
   }
 
   @override
   Future<Either<Failure, AuthResponse>> loginWithCredentials({
-    LoginRequest loginRequest,
+    required LoginRequest loginRequest,
   }) async {
     final url = "auth/login";
 
@@ -81,7 +81,7 @@ class AuthService implements IAuthService {
 
   @override
   Future<Either<Failure, AuthResponse>> signupWithCredentials({
-    SignupRequest signupRequest,
+    required SignupRequest signupRequest,
   }) async {
     final url = "auth/signup";
 

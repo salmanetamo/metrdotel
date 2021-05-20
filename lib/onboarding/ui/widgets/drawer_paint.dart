@@ -7,7 +7,7 @@ class DrawerPaint extends CustomPainter {
 
   DrawerPaint({
     this.curveColor = Colors.black,
-    this.radius
+    required this.radius
   }) : curvePaint = Paint()
           ..color = curveColor
           ..style = PaintingStyle.fill;

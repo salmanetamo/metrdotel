@@ -2,23 +2,24 @@ part of 'password_reset_cubit.dart';
 
 @immutable
 class PasswordResetState extends Equatable {
-  final String email;
-  final String message;
-  final StateStatus status;
-  final Failure failure;
+  final String? email;
+  final String? message;
+  final StateStatus? status;
+  final Failure? failure;
 
-  PasswordResetState(
-      {@required this.email,
-      @required this.message,
-      @required this.status,
-      @required this.failure});
+  PasswordResetState({
+    required this.email,
+    required this.message,
+    required this.status,
+    required this.failure,
+  });
 
   PasswordResetState copyWith({
-    String email,
-    String password,
-    String message,
-    StateStatus status,
-    Failure failure,
+    String? email,
+    String? password,
+    String? message,
+    StateStatus? status,
+    Failure? failure,
   }) {
     return PasswordResetState(
       email: email ?? this.email,
@@ -30,10 +31,10 @@ class PasswordResetState extends Equatable {
 
   @override
   List<Object> get props => [
-        this.email,
-        this.message,
-        this.status,
-        this.failure,
+        this.email as Object,
+        this.message as Object,
+        this.status as Object,
+        this.failure as Object,
       ];
 
   @override

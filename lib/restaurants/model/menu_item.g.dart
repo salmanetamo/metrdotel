@@ -12,9 +12,9 @@ MenuItem _$MenuItemFromJson(Map<String, dynamic> json) {
     restaurantId: json['restaurantId'] as String,
     name: json['name'] as String,
     picture: json['picture'] as String,
-    price: (json['price'] as num)?.toDouble(),
+    price: (json['price'] as num).toDouble(),
     description: json['description'] as String,
-    types: (json['types'] as List)?.map((e) => e as String)?.toList(),
+    types: (json['types'] as List<dynamic>).map((e) => e as String).toList(),
   );
 }
 
