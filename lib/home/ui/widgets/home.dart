@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:metrdotel/home/ui/widgets/restaurant_filter.dart';
 import 'package:metrdotel/restaurants/model/restaurant.dart';
 import 'package:metrdotel/restaurants/state/restaurant_bloc.dart';
+import 'package:metrdotel/restaurants/ui/widgets/restaurant_card.dart';
 import 'package:metrdotel/shared/state/state_utils.dart';
 import 'package:metrdotel/shared/widgets/app_drawer.dart';
 import 'package:metrdotel/shared/widgets/form_inputs.dart';
@@ -120,22 +121,28 @@ class _HomeState extends State<Home> {
   }
 
   Widget getRestaurantsSection(BuildContext context, RestaurantState state) {
-    switch (state.status) {
-      case StateStatus.IN_PROGRESS:
-        return showLoadingSpinner(context);
-      case StateStatus.SUCCESS:
-        return ListView(
-          children: state.restaurants!
-              .map((restaurant) => this.restaurantCard(restaurant))
-              .toList(),
-        );
-      case StateStatus.FAILURE:
-        return Container(
-          child: Text(state.failure!.message!),
-        );
-      default:
-        return Container();
-    }
+    // TODO: Update this
+    return ListView(
+      children: restaurants
+          .map((restaurant) => RestaurantCard(restaurant: restaurant))
+          .toList(),
+    );
+    // switch (state.status) {
+    //   case StateStatus.IN_PROGRESS:
+    //     return showLoadingSpinner(context);
+    //   case StateStatus.SUCCESS:
+    //     return ListView(
+    //       children: state.restaurants!
+    //           .map((restaurant) => RestaurantCard(restaurant: restaurant))
+    //           .toList(),
+    //     );
+    //   case StateStatus.FAILURE:
+    //     return Container(
+    //       child: Text(state.failure!.message!),
+    //     );
+    //   default:
+    //     return Container();
+    // }
   }
 
     Widget buildRestaurantList() {
@@ -154,7 +161,7 @@ class _HomeState extends State<Home> {
             case StateStatus.SUCCESS:
               return ListView(
                 children: state.restaurants!
-                    .map((restaurant) => this.restaurantCard(restaurant))
+                    .map((restaurant) => RestaurantCard(restaurant: restaurant))
                     .toList(),
               );
             case StateStatus.FAILURE:
@@ -251,141 +258,6 @@ class _HomeState extends State<Home> {
               ),
             );
           }).toList(),
-        ),
-      );
-    }
-
-    Widget restaurantCard(Restaurant restaurant,
-        {Color backgroundColor = Colors.grey}) {
-      return Container(
-        padding: EdgeInsets.all(16.0),
-        margin: EdgeInsets.only(bottom: 16.0),
-        decoration: BoxDecoration(
-          color: backgroundColor == Colors.grey ? Colors.grey[200] : Colors
-              .white,
-          borderRadius: BorderRadius.all(Radius.circular(16.0)),
-        ),
-        child: Column(
-          children: [
-            Container(
-              margin: EdgeInsets.only(bottom: 8.0),
-              width: double.infinity,
-              height: MediaQuery
-                  .of(context)
-                  .size
-                  .height / 6,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(16.0)),
-                image: DecorationImage(
-                  image: AssetImage(
-                    'images/restaurant.jpg',
-                  ),
-                  fit: BoxFit.fitWidth,
-                ),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    margin: EdgeInsets.only(top: 8.0, left: 8.0),
-                    padding:
-                    EdgeInsets.symmetric(vertical: 2.0, horizontal: 16.0),
-                    decoration: BoxDecoration(
-                      color: Colors.grey[200]!.withOpacity(0.75),
-                      borderRadius: BorderRadius.all(Radius.circular(16.0)),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Icon(
-                          Icons.access_time,
-                          color: Theme
-                              .of(context)
-                              .primaryColor,
-                        ),
-                        Text(restaurant.openingHoursLabel)
-                      ],
-                    ),
-                  ),
-                  IconButton(
-                    icon: Icon(
-                      true ? Icons.bookmark : Icons.bookmark_border, // TODO: Check whether saved
-                      color: Theme
-                          .of(context)
-                          .primaryColor,
-                    ),
-                    onPressed: () {}, // TODO: Save restaurant
-                  )
-                ],
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.only(bottom: 8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    restaurant.name,
-                    style: Theme
-                        .of(context)
-                        .textTheme
-                        .bodyText1,
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        '(${restaurant.reviews.length})',
-                        style: Theme
-                            .of(context)
-                            .textTheme
-                            .subtitle1,
-                      ),
-                      Text(
-                        '${restaurant.averageRating}',
-                        style: Theme
-                            .of(context)
-                            .textTheme
-                            .bodyText1!
-                            .copyWith(fontWeight: FontWeight.bold),
-                      ),
-                      Icon(Icons.star_border_rounded)
-                    ],
-                  )
-                ],
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  child: Row(
-                    children: [
-                      Icon(Icons.location_on),
-                      Text(
-                        '${restaurant.location.name}',
-                        // TODO: Figure out location based on coordinates
-                        style: Theme
-                            .of(context)
-                            .textTheme
-                            .subtitle1,
-                      ),
-                    ],
-                  ),
-                ),
-                Row(
-                  children: [
-                    Icon(Icons.attach_money_rounded),
-                    Icon(Icons.attach_money_rounded),
-                    Icon(
-                      Icons.attach_money_rounded,
-                      color: Colors.grey,
-                    ),
-                  ],
-                )
-              ],
-            )
-          ],
         ),
       );
     }

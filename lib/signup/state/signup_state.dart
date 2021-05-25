@@ -1,7 +1,7 @@
 part of 'signup_cubit.dart';
 
 @immutable
-class SignupState extends Equatable {
+class SignupState {
   final String? email;
   final String? password;
   final String? firstName;
@@ -49,18 +49,18 @@ class SignupState extends Equatable {
     );
   }
 
-  @override
-  List<Object> get props => [
-        this.email as Object,
-        this.password as Object,
-        this.firstName as Object,
-        this.lastName as Object,
-        this.confirmPassword as Object,
-        this.acceptedTermsAndConditions as Object,
-        this.message as Object,
-        this.status as Object,
-        this.failure as Object,
-      ];
+  // @override
+  // List<Object> get props => [
+  //       this.email as Object,
+  //       this.password as Object,
+  //       this.firstName as Object,
+  //       this.lastName as Object,
+  //       this.confirmPassword as Object,
+  //       this.acceptedTermsAndConditions as Object,
+  //       this.message as Object,
+  //       this.status as Object,
+  //       this.failure as Object,
+  //     ];
 
   @override
   String toString() {

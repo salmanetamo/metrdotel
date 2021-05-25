@@ -1,7 +1,7 @@
 part of 'login_cubit.dart';
 
 @immutable
-class LoginState extends Equatable {
+class LoginState {
   final String? email;
   final String? password;
   final String? message;
@@ -26,15 +26,6 @@ class LoginState extends Equatable {
       failure: failure ?? this.failure,
     );
   }
-
-  @override
-  List<Object> get props => [
-        this.email as Object,
-        this.password as Object,
-        this.message as Object,
-        this.status as Object,
-        this.failure as Object,
-      ];
 
   @override
   String toString() {
