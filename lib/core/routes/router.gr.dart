@@ -54,10 +54,10 @@ class Router extends _i1.RootStackRouter {
 
   @override
   List<_i1.RouteConfig> get routes => [
-        _i1.RouteConfig(OnboardingRoute.name, path: '/'),
+        _i1.RouteConfig(OnboardingRoute.name, path: '/Onboarding'),
         _i1.RouteConfig(LoginScreenRoute.name, path: '/login-screen'),
         _i1.RouteConfig(SignupScreenRoute.name, path: '/signup-screen'),
-        _i1.RouteConfig(HomeScreenRoute.name, path: '/home-screen'),
+        _i1.RouteConfig(HomeScreenRoute.name, path: '/'),
         _i1.RouteConfig(TermsOfUseRoute.name, path: '/terms-of-use'),
         _i1.RouteConfig(PasswordResetScreenRoute.name,
             path: '/password-reset-screen')
@@ -65,7 +65,7 @@ class Router extends _i1.RootStackRouter {
 }
 
 class OnboardingRoute extends _i1.PageRouteInfo {
-  const OnboardingRoute() : super(name, path: '/');
+  const OnboardingRoute() : super(name, path: '/Onboarding');
 
   static const String name = 'OnboardingRoute';
 }
@@ -83,7 +83,7 @@ class SignupScreenRoute extends _i1.PageRouteInfo {
 }
 
 class HomeScreenRoute extends _i1.PageRouteInfo {
-  const HomeScreenRoute() : super(name, path: '/home-screen');
+  const HomeScreenRoute() : super(name, path: '/');
 
   static const String name = 'HomeScreenRoute';
 }
