@@ -4,13 +4,9 @@ Restaurant booking app
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+This project is a Flutter application for a restaurant booking application.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- The design is inspired from [here](https://www.behance.net/gallery/94907491/Restaurant-reservation-app) on Behance
+- The backend is a Spring Boot project still in progress, you can find it [here](https://github.com/salmanetamo/metrdotel-api)
+- The .env.example file contains an example of the environment variables:
+    - BASE_URL: The root of the url to the backend (Currently using [Ngrok](https://ngrok.com/) to generate url to localhost)
